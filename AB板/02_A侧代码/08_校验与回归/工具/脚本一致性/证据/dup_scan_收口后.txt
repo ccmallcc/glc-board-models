@@ -1,0 +1,168 @@
+== 汇总 ==
+  出现在多处的文件名        : 192
+    其中 md5 全同（安全副本）: 161
+    其中 md5 有分歧（漂移）  : 31
+
+-- README.txt  (12 份 / 12 种)
+     3954ddf7     6302  assets/版本包_20260926/V6_拆流水_时序收敛/README.txt
+     e17178cf     5629  assets/版本包_20260926/V5_时序后优化_phys_opt/README.txt
+     bc4af49a     5573  assets/版本包_20260926/V4_官方视频时钟BUFGMUX修复/README.txt
+     96273da1     3700  assets/HDMI适配_20260926/README.txt
+     4d5f242c     3458  assets/板端全链路_20260926/README.txt
+     66171777     3248  assets/PC自洽解码_20260926/README.txt
+     61c7442b     2535  assets/HDMI屏_MPI107_20260926/README.txt
+     a53b70f0     2110  assets/版本包_20260926/_构建日志与脚本/README.txt
+     5ef7e515     1900  assets/版本包_20260926/V2_rans_npu2_4cycle_hardened/README.txt
+     ad3326fe     1340  assets/版本包_20260926/V1_第一版_4cycle_official_regctrl/README.txt
+     e5f914db     1113  assets/版本包_20260926/V3_rans_npu3_6cycle_split/README.txt
+     1f902c9d      550  assets/版本包_20260926/V0_官方原厂与硬件自检/README.txt
+
+-- README_GLC归档说明.txt  (2 份 / 2 种)
+     e3965dd0     3932  assets/FPGA新增交付_20261006/README_GLC归档说明.txt
+     b07e6815     2920  assets/A板发送端_20261007/README_GLC归档说明.txt
+
+-- build_rans.tcl  (2 份 / 2 种)
+     f0590a4d     5672  assets/版本包_20260926/_构建日志与脚本/build_rans.tcl
+     19dfe32b     4537  工具/PL构建/build_rans.tcl
+
+-- color_bar.v  (3 份 / 2 种)
+     f7ffaaf7    13543  assets/V9显示端配置_1024x600/color_bar.v
+     47c5cbc7    11812  assets/HDMI适配_20260926/rtl/color_bar.v
+     47c5cbc7    11812  assets/V8显示端配置_给B/rtl/color_bar.v
+
+-- decode_board.py  (4 份 / 3 种)
+     13fa01b6    10956  工具/解码端诊断/decode_board.py
+     c7f6de11    10657  B侧/给A_20261012_rANS解码器/board/decode_board.py
+     c7f6de11    10657  B侧/给A_20261012_脚本与文档/01_脚本/decode_board.py
+     bf0fba0f     9303  assets/FPGA新增交付_20261006/02_脚本/上板/decode_board.py
+
+-- decode_board_s4split5_fast.py  (2 份 / 2 种)
+     ca71545f    12744  B侧/给A_20261012_rANS解码器/board/decode_board_s4split5_fast.py
+     9ffd6b26    10968  B侧/给A_20261012_脚本与文档/01_脚本/decode_board_s4split5_fast.py
+
+-- dtu_at.py  (3 份 / 2 种)
+     726a30b7     3114  B侧/给A_20261012_脚本与文档/01_脚本/dtu_at.py
+     8f012934     3015  assets/A板发送端_20261007/02_脚本/dtu_at.py
+     8f012934     3015  工具/板端脚本快照_20261015/dtu_at.py
+
+-- frame_to_ps_largebuf.v  (3 份 / 3 种)
+     2396196e    33180  assets/V9显示端配置_1024x600/frame_to_ps_largebuf.v
+     3f7f9130    32561  assets/HDMI适配_20260926/rtl/frame_to_ps_largebuf.v
+     3e983bc8    32497  assets/V8显示端配置_给B/rtl/frame_to_ps_largebuf.v
+
+-- glc_board_full.py  (3 份 / 2 种)
+     1ff32a74    19482  工具/板端程序/glc_board_full.py
+     1ff32a74    19482  工具/板端脚本快照_20261015/glc/glc_board_full.py
+     9c7668b1    18256  assets/板端全链路_20260926/脚本/glc_board_full.py
+
+-- glc_ui.py  (2 份 / 2 种)
+     e5302bcd    86048  工具/板端脚本快照_20261015/glc_ui.py
+     ee2c39da    84199  工具/触摸屏UI/glc_ui.py
+
+-- hdmi-montage.py  (2 份 / 2 种)
+     efa2a1c9     4502  B侧/给A_20261012_rANS解码器/board/hdmi-montage.py
+     1875dda9     3112  B侧/给A_20261012_脚本与文档/01_脚本/hdmi-montage.py
+
+-- load_bitstream.sh  (2 份 / 2 种)
+     343d5eeb     3360  工具/板端启动/load_bitstream.sh
+     976a39a1     1645  工具/板端脚本快照_20261015/glc/load_bitstream.sh
+
+-- main.cpp  (2 份 / 2 种)
+     63a31bdd     2604  开发板程序模板/bench/main.cpp
+     87dd77e5     1149  开发板程序模板/hello/main.cpp
+
+-- make_mix_csv.py  (4 份 / 2 种)
+     b33e6488     3728  工具/make_mix_csv.py
+     b33e6488     3728  工具/量化复核/给B_mix_precision/make_mix_csv.py
+     b33e6488     3728  给B_20261011_校准集与mix/mix_precision/make_mix_csv.py
+     9f133c46     1106  B侧/给A_20261012_脚本与文档/01_脚本/make_mix_csv.py
+
+-- radio_check.py  (2 份 / 2 种)
+     80c01a46     3445  工具/板端脚本快照_20261015/radio_check.py
+     d758a359     2297  工具/板端脚本/radio_check.py
+
+-- radio_rx.py  (2 份 / 2 种)
+     1aa2e3be     8206  B侧/给A_20261012_脚本与文档/01_脚本/radio_rx.py
+     e7e6a13f     4313  assets/A板发送端_20261007/02_脚本/radio_rx.py
+
+-- radio_rx_session.py  (3 份 / 2 种)
+     2d50f1d6    15876  B侧/给A_20261012_脚本与文档/01_脚本/radio_rx_session.py
+     e7433ec3    13918  工具/无线/radio_rx_session.py
+     e7433ec3    13918  工具/板端脚本快照_20261015/radio_rx_session.py
+
+-- radio_tx.py  (2 份 / 2 种)
+     f624a477     5062  B侧/给A_20261012_脚本与文档/01_脚本/radio_tx.py
+     223fbc0a     3315  assets/A板发送端_20261007/02_脚本/radio_tx.py
+
+-- rans_cdf.v  (6 份 / 2 种)
+     528d6425    16964  assets/版本包_20260926/V6_拆流水_时序收敛/rtl/rans_cdf.v
+     528d6425    16964  C2_PL熵编码器/rtl/rans_cdf.v
+     0d32237c    12749  assets/版本包_20260926/V1_第一版_4cycle_official_regctrl/rtl/rans_cdf.v
+     0d32237c    12749  assets/版本包_20260926/V2_rans_npu2_4cycle_hardened/rtl/rans_cdf.v
+     0d32237c    12749  assets/版本包_20260926/V4_官方视频时钟BUFGMUX修复/rtl/rans_cdf.v
+     0d32237c    12749  assets/版本包_20260926/V5_时序后优化_phys_opt/rtl/rans_cdf.v
+
+-- rans_enc_put.v  (6 份 / 2 种)
+     db686b91    10672  assets/版本包_20260926/V3_rans_npu3_6cycle_split/rtl/rans_enc_put.v
+     db686b91    10672  assets/版本包_20260926/V4_官方视频时钟BUFGMUX修复/rtl/rans_enc_put.v
+     db686b91    10672  assets/版本包_20260926/V5_时序后优化_phys_opt/rtl/rans_enc_put.v
+     db686b91    10672  assets/版本包_20260926/V6_拆流水_时序收敛/rtl/rans_enc_put.v
+     db686b91    10672  C2_PL熵编码器/rtl/rans_enc_put.v
+     fe2b739e     8002  assets/版本包_20260926/V1_第一版_4cycle_official_regctrl/rtl/rans_enc_put.v
+
+-- rans_top.v  (7 份 / 2 种)
+     f23b2cab    22410  assets/版本包_20260926/V2_rans_npu2_4cycle_hardened/rtl/rans_top.v
+     f23b2cab    22410  assets/版本包_20260926/V3_rans_npu3_6cycle_split/rtl/rans_top.v
+     f23b2cab    22410  assets/版本包_20260926/V4_官方视频时钟BUFGMUX修复/rtl/rans_top.v
+     f23b2cab    22410  assets/版本包_20260926/V5_时序后优化_phys_opt/rtl/rans_top.v
+     f23b2cab    22410  assets/版本包_20260926/V6_拆流水_时序收敛/rtl/rans_top.v
+     f23b2cab    22410  C2_PL熵编码器/rtl/rans_top.v
+     a50517c9    21539  assets/版本包_20260926/V1_第一版_4cycle_official_regctrl/rtl/rans_top.v
+
+-- report.json  (2 份 / 2 种)
+     fb041770      501  assets/FPGA新增交付_20261006/03_产物/board_flow/radio/decode_radio_20261006_200429/report.json
+     74146430      500  assets/FPGA新增交付_20261006/03_产物/board_flow/radio/decode_wired_20261006_200429/report.json
+
+-- run_build.bat  (3 份 / 2 种)
+     c19294c3      766  E3_PWM呼吸灯上板验证/run_build.bat
+     518b4416      361  assets/版本包_20260926/_构建日志与脚本/run_build.bat
+     518b4416      361  工具/PL构建/run_build.bat
+
+-- rx_sdi.v  (5 份 / 3 种)
+     1a45d6c1    26017  assets/V9显示端配置_1024x600/rx_sdi.v
+     b0822054    25104  assets/V8显示端配置_给B/rtl/rx_sdi.v
+     bc70047f    14981  assets/版本包_20260926/V4_官方视频时钟BUFGMUX修复/rtl/rx_sdi.v
+     bc70047f    14981  assets/版本包_20260926/V5_时序后优化_phys_opt/rtl/rx_sdi.v
+     bc70047f    14981  assets/版本包_20260926/V6_拆流水_时序收敛/rtl/rx_sdi.v
+
+-- send_image.sh  (3 份 / 2 种)
+     08faf053    14931  工具/板端脚本/send_image.sh
+     08faf053    14931  工具/电台发图/send_image.sh
+     b38a88ef    14319  工具/板端脚本快照_20261015/send_image.sh
+
+-- setup_ram_models.sh  (2 份 / 2 种)
+     3dc6299b     3769  B侧/给A_20261012_rANS解码器/board/setup_ram_models.sh
+     f49d629d     1206  B侧/给A_20261012_脚本与文档/01_脚本/setup_ram_models.sh
+
+-- start_ui.sh  (2 份 / 2 种)
+     69b62d9a     8887  工具/触摸屏UI/start_ui.sh
+     95b93829     7305  工具/板端脚本快照_20261015/start_ui.sh
+
+-- tp5603_bd.py  (3 份 / 2 种)
+     2b455b31     8028  assets/FPGA新增交付_20261006/02_脚本/上板/tp5603_bd.py
+     8350e071     4388  assets/A板发送端_20261007/03_CH340驱动/board_scripts/tp5603_bd.py
+     8350e071     4388  assets/FPGA新增交付_20261006/03_产物/驱动/board_scripts/tp5603_bd.py
+
+-- ui_send.sh  (2 份 / 2 种)
+     7fbe76fe     7172  工具/触摸屏UI/ui_send.sh
+     a3feea84     6560  工具/板端脚本快照_20261015/ui_send.sh
+
+-- video_define.v  (3 份 / 3 种)
+     819227e8     1739  assets/V9显示端配置_1024x600/video_define.v
+     b4fdf996      658  assets/V8显示端配置_给B/rtl/video_define.v
+     da5c458b       76  assets/HDMI适配_20260926/rtl/video_define.v
+
+-- 校验清单_md5.txt  (2 份 / 2 种)
+     027dc4a7     1011  assets/V8显示端配置_给B/校验清单_md5.txt
+     29a71a5b      508  assets/V9显示端配置_1024x600/校验清单_md5.txt
+

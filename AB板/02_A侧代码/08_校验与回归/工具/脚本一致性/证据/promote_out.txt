@@ -1,0 +1,181 @@
+== ① 正本只在快照里（需提升到主题目录）==
+   eaf89bc4  /root/A_send_session.py       
+        ← 工具/板端脚本快照_20261015/A_send_session.py
+        （仓库里的同名旧版：工具/无线/A_send_session.py=40871365）
+   bd6d9a2e  /root/board_iface_probe.sh    
+        ← 工具/板端脚本快照_20261015/board_iface_probe.sh
+        （仓库里的同名旧版：）
+   3c9c8906  /root/board_iface_probe2.sh   
+        ← 工具/板端脚本快照_20261015/board_iface_probe2.sh
+        （仓库里的同名旧版：）
+   2fda150c  /root/board_iface_probe3.sh   
+        ← 工具/板端脚本快照_20261015/board_iface_probe3.sh
+        （仓库里的同名旧版：）
+   5e20652a  /root/board_ls_run.sh         
+        ← 工具/板端脚本快照_20261015/board_ls_run.sh
+        （仓库里的同名旧版：）
+   3decbba3  /root/board_models_md5.sh     
+        ← 工具/板端脚本快照_20261015/board_models_md5.sh
+        （仓库里的同名旧版：）
+   7ab014bc  /root/board_probe_env.sh      
+        ← 工具/板端脚本快照_20261015/board_probe_env.sh
+        （仓库里的同名旧版：）
+   a10a4b2b  /root/board_usb_drv_probe.sh  
+        ← 工具/板端脚本快照_20261015/board_usb_drv_probe.sh
+        （仓库里的同名旧版：）
+   e9d439b3  /root/cap_probe.sh            
+        ← 工具/板端脚本快照_20261015/cap_probe.sh
+        （仓库里的同名旧版：）
+   59784455  /root/daemon_up.sh            
+        ← 工具/板端脚本快照_20261015/daemon_up.sh
+        （仓库里的同名旧版：）
+   63fdd0f1  /root/e3_fill.sh              
+        ← 工具/板端脚本快照_20261015/e3_fill.sh
+        （仓库里的同名旧版：）
+   a256c959  /root/e3_test.sh              
+        ← 工具/板端脚本快照_20261015/e3_test.sh
+        （仓库里的同名旧版：）
+   092a1321  /root/enc_image.py            
+        ← 工具/板端脚本快照_20261015/enc_image.py
+        （仓库里的同名旧版：）
+   83013d23  /root/enc_run.sh              
+        ← 工具/板端脚本快照_20261015/enc_run.sh
+        （仓库里的同名旧版：）
+   e52f4ee3  /root/enc_time.sh             
+        ← 工具/板端脚本快照_20261015/enc_time.sh
+        （仓库里的同名旧版：）
+   66782f09  /root/glc/collect_final.sh    
+        ← 工具/板端脚本快照_20261015/glc/collect_final.sh
+        （仓库里的同名旧版：）
+   1ff32a74  /root/glc/glc_board_full.py   
+        ← 工具/板端脚本快照_20261015/glc/glc_board_full.py
+        （仓库里的同名旧版：assets/板端全链路_20260926/脚本/glc_board_full.py=9c7668b1, 工具/板端程序/glc_board_full.py=9c7668b1）
+   3eb00d85  /root/glc/pack_full0.sh       
+        ← 工具/板端脚本快照_20261015/glc/pack_full0.sh
+        （仓库里的同名旧版：）
+   97dcd178  /root/glcenc_daemon.py        
+        ← 工具/板端脚本快照_20261015/glcenc_daemon.py
+        （仓库里的同名旧版：工具/电台发图/glcenc_daemon.py=4c60d533）
+   47d7de5e  /root/guard_diff2.py          
+        ← 工具/板端脚本快照_20261015/guard_diff2.py
+        （仓库里的同名旧版：）
+   d25356ea  /root/guard_phase.py          
+        ← 工具/板端脚本快照_20261015/guard_phase.py
+        （仓库里的同名旧版：）
+   cbab1dda  /root/health_probe.sh         
+        ← 工具/板端脚本快照_20261015/health_probe.sh
+        （仓库里的同名旧版：）
+   98b93094  /root/hold_chunk.py           
+        ← 工具/板端脚本快照_20261015/hold_chunk.py
+        （仓库里的同名旧版：）
+   9f2284e1  /root/icraft_probe.py         
+        ← 工具/板端脚本快照_20261015/icraft_probe.py
+        （仓库里的同名旧版：）
+   7c3e0383  /root/icraft_probe2.py        
+        ← 工具/板端脚本快照_20261015/icraft_probe2.py
+        （仓库里的同名旧版：）
+   5ad5bd24  /root/load_rans2.sh           
+        ← 工具/板端脚本快照_20261015/load_rans2.sh
+        （仓库里的同名旧版：）
+   cf56f1cf  /root/login.py                
+        ← 工具/板端脚本快照_20261015/login.py
+        （仓库里的同名旧版：）
+   b971e007  /root/min_probe.sh            
+        ← 工具/板端脚本快照_20261015/min_probe.sh
+        （仓库里的同名旧版：）
+   e0c29c3a  /root/poc_session.py          
+        ← 工具/板端脚本快照_20261015/poc_session.py
+        （仓库里的同名旧版：）
+   b1515035  /root/probe_send.sh           
+        ← 工具/板端脚本快照_20261015/probe_send.sh
+        （仓库里的同名旧版：）
+   ee264e3c  /root/recon_dec.sh            
+        ← 工具/板端脚本快照_20261015/recon_dec.sh
+        （仓库里的同名旧版：）
+   438a254c  /root/recon_dec2.sh           
+        ← 工具/板端脚本快照_20261015/recon_dec2.sh
+        （仓库里的同名旧版：）
+   3797a0b6  /root/recon_encode.sh         
+        ← 工具/板端脚本快照_20261015/recon_encode.sh
+        （仓库里的同名旧版：）
+   e31d7223  /root/resident_test.sh        
+        ← 工具/板端脚本快照_20261015/resident_test.sh
+        （仓库里的同名旧版：）
+   2fba88cd  /root/rgb_order_test.py       
+        ← 工具/板端脚本快照_20261015/rgb_order_test.py
+        （仓库里的同名旧版：）
+   a779d53c  /root/run_addr.sh             
+        ← 工具/板端脚本快照_20261015/run_addr.sh
+        （仓库里的同名旧版：）
+   0faa5aa0  /root/run_official_demo.sh    
+        ← 工具/板端脚本快照_20261015/run_official_demo.sh
+        （仓库里的同名旧版：）
+   8b328c8f  /root/run_poc.sh              
+        ← 工具/板端脚本快照_20261015/run_poc.sh
+        （仓库里的同名旧版：）
+   241d75ff  /root/run_poc2.sh             
+        ← 工具/板端脚本快照_20261015/run_poc2.sh
+        （仓库里的同名旧版：）
+   d0235a42  /root/run_poc_s1.sh           
+        ← 工具/板端脚本快照_20261015/run_poc_s1.sh
+        （仓库里的同名旧版：）
+   df7bfe94  /root/run_rsd.sh              
+        ← 工具/板端脚本快照_20261015/run_rsd.sh
+        （仓库里的同名旧版：）
+   7a3bc396  /root/run_sess.sh             
+        ← 工具/板端脚本快照_20261015/run_sess.sh
+        （仓库里的同名旧版：）
+   0494ec9b  /root/run_sess2.sh            
+        ← 工具/板端脚本快照_20261015/run_sess2.sh
+        （仓库里的同名旧版：）
+   bca2bfe9  /root/run_sess3.sh            
+        ← 工具/板端脚本快照_20261015/run_sess3.sh
+        （仓库里的同名旧版：）
+   b38a88ef  /root/send_image.patched.sh   
+        ← 工具/板端脚本快照_20261015/send_image.patched.sh
+        ← 工具/板端脚本快照_20261015/send_image.sh
+        （仓库里的同名旧版：）
+   62f1063b  /root/sermark.sh              
+        ← 工具/板端脚本快照_20261015/sermark.sh
+        （仓库里的同名旧版：）
+   a1c69aa4  /root/serwd.sh                
+        ← 工具/板端脚本快照_20261015/serwd.sh
+        （仓库里的同名旧版：）
+   21a2c784  /root/serwd2.sh               
+        ← 工具/板端脚本快照_20261015/serwd2.sh
+        （仓库里的同名旧版：）
+   6ec0fe4b  /root/show_err.sh             
+        ← 工具/板端脚本快照_20261015/show_err.sh
+        （仓库里的同名旧版：）
+   4c1a5879  /root/speed1_tmpfs.sh         
+        ← 工具/板端脚本快照_20261015/speed1_tmpfs.sh
+        （仓库里的同名旧版：）
+   432fb735  /root/subgraph_timing.sh      
+        ← 工具/板端脚本快照_20261015/subgraph_timing.sh
+        （仓库里的同名旧版：）
+   8bc0b3a0  /root/tcp_speed_test.py       
+        ← 工具/板端脚本快照_20261015/tcp_speed_test.py
+        （仓库里的同名旧版：）
+   5baaa33b  /root/test_window.sh          
+        ← 工具/板端脚本快照_20261015/test_window.sh
+        （仓库里的同名旧版：）
+   0d111c08  /root/ui_test12.sh            
+        ← 工具/板端脚本快照_20261015/ui_test12.sh
+        （仓库里的同名旧版：）
+   8829de56  /root/ui_test4.sh             
+        ← 工具/板端脚本快照_20261015/ui_test4.sh
+        （仓库里的同名旧版：工具/触摸屏UI/ui_test4.sh=8ef55101）
+   a6f49ba2  /root/ui_wake_check.sh        
+        ← 工具/板端脚本快照_20261015/ui_wake_check.sh
+        （仓库里的同名旧版：）
+   7aced089  /root/window_test.sh          
+        ← 工具/板端脚本快照_20261015/window_test.sh
+        （仓库里的同名旧版：）
+   67bf8f31  /root/yh_probe.sh             
+        ← 工具/板端脚本快照_20261015/yh_probe.sh
+        （仓库里的同名旧版：）
+   小计 58 个
+
+== ② 板端文件在仓库里【改名】存放 ==
+   小计 0 个
+

@@ -1,0 +1,44 @@
+# s4_int8 重标定用的标定列表：calibref_real 的前 40 张（真实照片）
+# 为什么是 40 而不是全部 56：icraft-quantize.exe 在 48 个样本时必崩（0xC0000005），
+#                                   二分实测 40 能跑通。详见 41 号文档。
+# 标定集目录：工作区\calibref_real\calib\s4_gs_generator\ （每个 ftmp 262,144 B = y_hat）
+00.ftmp
+01.ftmp
+02.ftmp
+03.ftmp
+04.ftmp
+05.ftmp
+06.ftmp
+07.ftmp
+08.ftmp
+09.ftmp
+10.ftmp
+11.ftmp
+12.ftmp
+13.ftmp
+14.ftmp
+15.ftmp
+16.ftmp
+17.ftmp
+18.ftmp
+19.ftmp
+20.ftmp
+21.ftmp
+22.ftmp
+23.ftmp
+24.ftmp
+25.ftmp
+26.ftmp
+27.ftmp
+28.ftmp
+29.ftmp
+30.ftmp
+31.ftmp
+32.ftmp
+33.ftmp
+34.ftmp
+35.ftmp
+36.ftmp
+37.ftmp
+38.ftmp
+39.ftmp

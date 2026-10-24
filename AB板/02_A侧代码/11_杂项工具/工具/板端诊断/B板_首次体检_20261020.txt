@@ -1,0 +1,703 @@
+############################################################
+# bcheck.sh report
+# collected host : U.FMSH
+# collected at   : 2026-09-22T14:23:43Z UTC
+# script md5     : 5244a1aa08858604d7d5087f7363a62d
+############################################################
+
+########## S1  IDENTITY / ENVIRONMENT ##########
+
+===== uname =====
+--- $ uname -a
+Linux U.FMSH 5.4.52 #3 SMP Fri Mar 13 13:44:29 CST 2026 aarch64 aarch64 aarch64 GNU/Linux
+--- [end]
+
+===== device tree model =====
+--- $ tr -d '' < /proc/device-tree/model; echo
+FMQLMP FMQL100TAI
+--- [end]
+
+===== compatible =====
+--- $ tr -d '' < /proc/device-tree/compatible; echo
+fmsh,fmsh-fmqlmp
+--- [end]
+
+===== os release =====
+--- $ cat /etc/os-release
+NAME="Ubuntu"
+VERSION="20.04.4 LTS (Focal Fossa)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 20.04.4 LTS"
+VERSION_ID="20.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
+--- [end]
+
+===== uptime / boot =====
+--- $ uptime; echo; who -b 2>/dev/null; echo; cat /proc/uptime
+ 14:23:43 up 4 min,  0 users,  load average: 1.46, 1.23, 0.57
+
+         system boot  Jan  1 00:00
+
+299.96 859.54
+--- [end]
+
+===== kernel cmdline =====
+--- $ cat /proc/cmdline
+console=ttyPS0,115200n8 earlycon=uart8250,mmio32,0xe0004000 loglevel=8 root=/dev/mmcblk0p2 rootwait rw clk_ignore_unused mem=1024M
+--- [end]
+
+===== rtc present =====
+--- $ ls -l /dev/rtc* 2>&1; dmesg 2>/dev/null | grep -i -E 'rtc|hctosys' | tail -5
+ls: cannot access '/dev/rtc*': No such file or directory
+[    2.636626] hctosys: unable to open rtc device (rtc0)
+--- [end]
+
+########## S2  PS HEALTH (CPU / MEM / THERMAL / STORAGE / NET) ##########
+
+===== cpuinfo =====
+--- $ grep -E 'processor|model name|BogoMIPS|Features' /proc/cpuinfo | head -12; echo; grep -c ^processor /proc/cpuinfo
+processor	: 0
+BogoMIPS	: 200.00
+Features	: fp asimd evtstrm crc32 cpuid
+processor	: 1
+BogoMIPS	: 200.00
+Features	: fp asimd evtstrm crc32 cpuid
+processor	: 2
+BogoMIPS	: 200.00
+Features	: fp asimd evtstrm crc32 cpuid
+processor	: 3
+BogoMIPS	: 200.00
+Features	: fp asimd evtstrm crc32 cpuid
+
+4
+--- [end]
+
+===== loadavg / meminfo =====
+--- $ cat /proc/loadavg; echo; head -5 /proc/meminfo
+1.46 1.23 0.57 1/112 692
+
+MemTotal:        1017708 kB
+MemFree:          163524 kB
+MemAvailable:     420500 kB
+Buffers:           55544 kB
+Cached:           437220 kB
+--- [end]
+
+===== free =====
+--- $ free -m 2>/dev/null || true
+              total        used        free      shared  buff/cache   available
+Mem:            993         291         159         203         542         410
+Swap:             0           0           0
+--- [end]
+
+===== thermal zones =====
+--- $ for z in /sys/class/thermal/thermal_zone*; do [ -d "$z" ] && echo "$z type=$(cat $z/type 2>/dev/null) temp=$(cat $z/temp 2>/dev/null)"; done; echo '(none printed above => no thermal zone)'
+(none printed above => no thermal zone)
+--- [end]
+
+===== hwmon (volt/curr) =====
+--- $ for h in /sys/class/hwmon/hwmon*; do [ -d "$h" ] || continue; echo "== $h $(cat $h/name 2>/dev/null)"; for f in "$h"/in*_input "$h"/curr*_input "$h"/temp*_input; do [ -f "$f" ] && echo "  $f = $(cat $f 2>/dev/null)"; done; done; echo '(none printed above => no hwmon)'
+(none printed above => no hwmon)
+--- [end]
+
+===== cpufreq =====
+--- $ for c in /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq; do [ -f "$c" ] && echo "$c = $(cat $c)"; done | head -8; cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 2>/dev/null
+--- [end]
+
+===== disk =====
+--- $ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        26G   15G  9.9G  60% /
+devtmpfs        369M     0  369M   0% /dev
+tmpfs           497M  204M  294M  41% /dev/shm
+tmpfs           100M   72K  100M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+tmpfs           497M     0  497M   0% /sys/fs/cgroup
+tmpfs           100M     0  100M   0% /run/user/0
+--- [end]
+
+===== mmc / sd errors =====
+--- $ dmesg 2>/dev/null | grep -i -E 'mmc[0-9]|sdhci|I/O error|EXT4-fs error|remount' | tail -15
+[    2.412840] mmc_host mmc0: card is polling.
+[    2.429609] mmc_host mmc0: Bus speed (slot 0) = 100000000Hz (slot req 400000Hz, actual 400000HZ div = 125)
+[    2.624507] mmc_host mmc0: Bus speed (slot 0) = 100000000Hz (slot req 50000000Hz, actual 50000000HZ div = 1)
+[    2.646659] mmc0: new high speed SDXC card at address aaaa
+[    2.652575] mmcblk0: mmc0:aaaa SK64G 59.5 GiB 
+[    4.789132] systemd[1]: Starting Remount Root and Kernel File Systems...
+--- [end]
+
+===== net interfaces =====
+--- $ ip -br a 2>/dev/null || ifconfig -a
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+can0             DOWN           
+eth0             UP             192.168.1.2/24 fe80::ac59:f4ff:fe2d:3a99/64 
+sit0@NONE        DOWN           
+--- [end]
+
+===== net link speed =====
+--- $ for i in /sys/class/net/*; do n=$(basename $i); echo "$n: carrier=$(cat $i/carrier 2>/dev/null) speed=$(cat $i/speed 2>/dev/null) mtu=$(cat $i/mtu 2>/dev/null)"; done
+can0: carrier= speed= mtu=16
+eth0: carrier=1 speed=1000 mtu=1500
+lo: carrier=1 speed= mtu=65536
+sit0: carrier= speed= mtu=1480
+--- [end]
+
+===== routes =====
+--- $ ip route 2>/dev/null | head -10
+192.168.1.0/24 dev eth0 proto kernel scope link src 192.168.1.2 
+--- [end]
+
+===== dmesg errors(all) =====
+--- $ dmesg 2>/dev/null | grep -i -E 'error|fail|denied|timeout|Oops|BUG:|Call trace' | tail -25
+[    1.880116] mtdoops: mtd device (mtddev=name/number) must be supplied
+[    2.375910] cpu cpu0: failed to get clock: -2
+[    2.380285] cpufreq-dt: probe of cpufreq-dt failed with error -2
+[    2.670469] ttyPS0 - failed to request DMA
+[    4.729381] systemd[1]: Starting Load Kernel Module ramoops...
+--- [end]
+
+########## S3  PL / BITSTREAM STATE  (the NPU lives here) ##########
+
+!! NOTE: the NPU (ZG330) is an IP core INSIDE the PL fabric.
+!!       If the loaded bitstream does not contain it, the NPU is
+!!       simply not on the bus -- that is a bitstream fact, not a
+!!       broken chip. S3 tells us which .bin was last loaded.
+
+===== fpga_manager state =====
+--- $ ls -l /sys/class/fpga_manager/ 2>&1; for m in /sys/class/fpga_manager/*; do echo "$m: state=$(cat $m/state 2>/dev/null) name=$(cat $m/name 2>/dev/null)"; done
+total 0
+lrwxrwxrwx 1 root root 0 Sep 22 14:23 fpga0 -> ../../devices/platform/amba-apu@0/e0040000.devcfg/fpga_manager/fpga0
+/sys/class/fpga_manager/fpga0: state=operating name=FMSH FMQL FPGA Manager
+--- [end]
+
+===== firmware dir =====
+--- $ ls -l /lib/firmware/ 2>&1 | head -40
+total 105168
+-rw-r--r-- 1 root  root  5980460 Sep 22  2026 ai7030_top_disable_icap.bin
+-rw-r--r-- 1 root  root  5980604 Sep 22  2026 ai7030_top_disable_icap.bit
+-rw-rw-r-- 1 mekli mekli 5980460 Sep 22  2026 auto_handshake.bin
+-rw-r--r-- 1 root  root  5980460 Sep 22  2026 glc_v4.bin
+-rw-r--r-- 1 root  root  5980460 Sep 22  2026 glc_v5.bin
+-rw-r--r-- 1 root  root  5980460 Sep 22  2026 glc_v6.bin
+-rw-rw-r-- 1 mekli mekli 5980460 Sep 22  2026 handshake_disable_icap.bin
+-rw-r--r-- 1 root  root  5979872 Sep 22  2026 handshake_test.bin
+drwxr-xr-x 2 root  root     4096 Apr 18  2023 linlon-v52_v76-80-2
+-rw-r--r-- 1 root  root  5980460 Sep 22  2026 pwm_breath_disable_icap.bin
+-rw-r--r-- 1 root  root  5980460 Sep 22  2026 rans_npu.bin
+-rw-r--r-- 1 root  root  5980460 Sep 22 14:20 rans_npu2.bin
+-rw-r--r-- 1 root  root  5980460 Sep 22  2026 rans_npu3.bin
+-rw-r--r-- 1 root  root  5979916 Sep 22  2026 v7_display_dither.bin
+-rw-r--r-- 1 root  root  5979916 Sep 22 14:19 v7_display_strict.bin
+-rw-r--r-- 1 root  root  5979916 Sep 22  2026 v7_quick.bin
+-rw-r--r-- 1 root  root  5979916 Sep 22  2026 v8_display24.bin
+-rw-r--r-- 1 root  root  5979916 Sep 22  2026 v8_display24_v4.bin
+-rw-r--r-- 1 root  root  5979916 Sep 22 14:23 v8_display24_v8.bin
+--- [end]
+
+===== firmware md5 =====
+--- $ for f in /lib/firmware/*.bin; do [ -f "$f" ] && md5sum "$f"; done 2>&1
+c8a07c0afec16a4752b243d34e01dd04  /lib/firmware/ai7030_top_disable_icap.bin
+417f15654aff5c96bfa794100c592232  /lib/firmware/auto_handshake.bin
+5286c81104ccf2fabfe913f67b1fd263  /lib/firmware/glc_v4.bin
+837110b929621e44e3e654ae6de641e8  /lib/firmware/glc_v5.bin
+3bd108d8dba473e7201fb7a736920641  /lib/firmware/glc_v6.bin
+417f15654aff5c96bfa794100c592232  /lib/firmware/handshake_disable_icap.bin
+c6df585c0e8db3fd5eb0f62762ba5635  /lib/firmware/handshake_test.bin
+7bf72ef5a0193497a521c6b4a2ad58ba  /lib/firmware/pwm_breath_disable_icap.bin
+49e8539636ce66d37672adb4ea6ed3a4  /lib/firmware/rans_npu.bin
+54b4503ab9feae00faf75d29b4ac2d0d  /lib/firmware/rans_npu2.bin
+bede688b3df6a5f4d7614b860825c1bb  /lib/firmware/rans_npu3.bin
+aeef54192a8650786991053e9c1f13d4  /lib/firmware/v7_display_dither.bin
+444217252f75b591801f91b4a6ddc222  /lib/firmware/v7_display_strict.bin
+29c576167bb4f4da7b5ef20790ac1e90  /lib/firmware/v7_quick.bin
+52935ccde8d62edca8d1b2d717db50a7  /lib/firmware/v8_display24.bin
+e2c47bae4a4b225ca5185072f9ea9e2e  /lib/firmware/v8_display24_v4.bin
+7a7c0b1f988f81745c49076442508d4c  /lib/firmware/v8_display24_v8.bin
+--- [end]
+
+===== dmesg fpga lines =====
+--- $ dmesg 2>/dev/null | grep -i -E 'fpga_manager|devcfg|PCAP|bitstream|FPGA Manager' | tail -20
+[    1.589117] FPGA manager framework
+[    2.468223] fpga_manager fpga0: FMSH FMQL FPGA Manager registered
+[   13.351900] fpga_manager fpga0: writing v7_display_strict.bin to FMSH FMQL FPGA Manager
+--- [end]
+
+===== who loads bitstream (unit files) =====
+--- $ grep -n 'fpga_manager' /etc/rc.local /etc/systemd/system/*.service /lib/systemd/system/*.service 2>/dev/null | head -20
+--- [end]
+
+===== who loads bitstream (root text) =====
+--- $ grep -ln 'fpga_manager' /root/*.sh /root/*.py /root/*.service 2>/dev/null | head -20; echo '(file names only)'
+/root/after_reboot.sh
+/root/bcheck.sh
+/root/board_snapshot.sh
+/root/board_ver_test.sh
+/root/force_reload_bit.sh
+/root/load_rans2.sh
+/root/recon_boot.sh
+/root/recover_and_watch.sh
+/root/run_official_demo.sh
+/root/safe_recover.sh
+/root/switch_bit.sh
+/root/test_decoder_error.sh
+/root/test_pushloop_full.sh
+/root/urgent_fix.sh
+/root/v4_board_test.sh
+/root/v4_load.sh
+/root/glc_watch.py
+/root/patch_run_demo.py
+/root/patch_run_demo2.py
+/root/run_demo_safe.py
+(file names only)
+--- [end]
+
+===== iomem map =====
+--- $ cat /proc/iomem | head -60
+00000000-3fffffff : System RAM
+  0fff9000-0fffcfff : reserved
+  10080000-10beffff : Kernel code
+  10bf0000-10c8ffff : reserved
+  10c90000-10d55fff : Kernel data
+  2ec00000-2edfffff : reserved
+  2efff000-2fbfffff : reserved
+  2fc12000-2fd92fff : reserved
+  2fd93000-2fde6fff : reserved
+  2fde9000-2fde9fff : reserved
+  2fdea000-2fdecfff : reserved
+  2fded000-3fffffff : reserved
+e0000000-e0000fff : e0000000.spi
+e0003000-e00030ff : e0003000.gpio
+e0003100-e00031ff : e0003100.gpio
+e0003200-e00032ff : e0003200.gpio
+e0003400-e00034ff : e0003400.gpio
+e0004000-e000401f : serial
+e0005000-e0005fff : sja1000_platform
+e0021000-e0021fff : e0021000.spi
+e0040000-e0040fff : e0040000.devcfg
+e0043000-e0043fff : e0043000.dwmmc
+e0045000-e0045fff : e0045000.usb
+e0047000-e0048fff : e0047000.ethernet
+e004b000-e004bfff : e004b000.dma
+e8000000-e8ffffff : e0000000.spi
+f0000000-f0003fff : f0000000.mali_gpu
+f0010000-f001ffff : f0010000.dma
+f0020000-f002ffff : f0020000.mve
+f9010000-f908ffff : f9010000.pmu
+--- [end]
+
+########## S4  NPU / ICRaFT RUNTIME  (read-only) ##########
+
+!! NOTE: no register is read here on purpose. S4 only inspects
+!!       driver/runtime/library state, which costs nothing to break.
+
+===== relevant /dev nodes =====
+--- $ ls -l /dev/uio* /dev/icraft* /dev/npu* /dev/zg* /dev/devcfg* 2>&1
+ls: cannot access '/dev/uio*': No such file or directory
+ls: cannot access '/dev/icraft*': No such file or directory
+ls: cannot access '/dev/npu*': No such file or directory
+ls: cannot access '/dev/zg*': No such file or directory
+ls: cannot access '/dev/devcfg*': No such file or directory
+--- [end]
+
+===== interrupts =====
+--- $ cat /proc/interrupts
+           CPU0       CPU1       CPU2       CPU3       
+  3:      19795      24975      26635      24623     GICv2  30 Level     arch_timer
+  8:          5          0          0          0     GICv2  40 Level     e0040000.devcfg
+  9:     107675          0          0          0     GICv2  45 Level     dw:dmac-1
+ 10:          0          0          0          0     GICv2 110 Level     dw_axi_dmac_platform
+ 11:          0          0          0          0     GICv2 102 Level     dw_axi_dmac_platform channel
+ 12:          0          0          0          0     GICv2 103 Level     dw_axi_dmac_platform channel
+ 13:          0          0          0          0     GICv2 104 Level     dw_axi_dmac_platform channel
+ 14:          0          0          0          0     GICv2 105 Level     dw_axi_dmac_platform channel
+ 15:          0          0          0          0     GICv2 106 Level     dw_axi_dmac_platform channel
+ 16:          0          0          0          0     GICv2 107 Level     dw_axi_dmac_platform channel
+ 17:          0          0          0          0     GICv2 108 Level     dw_axi_dmac_platform channel
+ 18:          0          0          0          0     GICv2 109 Level     dw_axi_dmac_platform channel
+ 19:        581          0          0          0     GICv2  51 Level     eth0
+ 20:          0          0          0          0     GICv2  33 Level     f0000000.mali_gpu
+ 21:          0          0          0          0     GICv2  34 Level     f0000000.mali_gpu
+ 22:          1          0          0          0     GICv2  35 Level     f0000000.mali_gpu
+ 23:     385243          0          0          0     GICv2  52 Level     dw-mci
+ 24:          0          0          0          0     GICv2  46 Level     e0000000.spi
+ 25:          0          0          0          0     GICv2  75 Level     e0021000.spi
+ 26:        266          0          0          0     GICv2  55 Level     ttyPS0
+ 27:         56          0          0          0     GICv2  50 Level     e0045000.usb, dwc2_hsotg:usb1
+ 28:          0          0          0          0     GICv2 101 Level     f0020000.mve
+IPI0:       3873      15213      30494      33223  Rescheduling interrupts
+IPI1:       2385      22905      24062      21583  Function call interrupts
+IPI2:          0          0          0          0  CPU stop interrupts
+IPI4:          0          0          0          0  Timer broadcast interrupts
+IPI5:          0          0          0          0  IRQ work interrupts
+Err:          0
+--- [end]
+
+===== lsmod =====
+--- $ cat /proc/modules | sort | head -30; echo '--- count:'; wc -l < /proc/modules
+amvx 196608 0 - Live 0xffffffc0089ca000 (O)
+ch341 16384 0 - Live 0xffffffc008a04000 (O)
+mali_kbase 462848 0 - Live 0xffffffc008958000 (O)
+u_dma_buf 28672 2 - Live 0xffffffc008950000 (O)
+usbserial 32768 1 ch341, Live 0xffffffc0089fb000 (O)
+--- count:
+5
+--- [end]
+
+===== dmesg npu/axi/dma =====
+--- $ dmesg 2>/dev/null | grep -i -E 'npu|zg330|icraft|ai7030|axi|dma|devcfg|uio' | tail -30
+[    0.000000]   DMA32 zone: 3584 pages used for memmap
+[    0.000000]   DMA32 zone: 0 pages reserved
+[    0.000000]   DMA32 zone: 262144 pages, LIFO batch:63
+[    0.157030] DMA: preallocated 256 KiB pool for atomic allocations
+[    1.515613] dw_dmac e004b000.dma: DesignWare DMA Controller, 8 channels
+[    1.764535] dw_axi_dmac_platform f0010000.dma: Every channel has independent irq number
+[    1.773103] dw_axi_dmac_platform f0010000.dma: DesignWare AXI DMA Controller, 8 channels
+[    1.850016] misc dma_buf_te: dma_buf_te ready
+[    1.993927] fmql-dwmac e0047000.ethernet: DMA HW capability register supported
+[    2.271461] dwc2 e0045000.usb: host_dma is enable.
+[    2.276263] dwc2 e0045000.usb: g_dma is enable.
+[    2.280800] dwc2 e0045000.usb: g_dma_desc is enable.
+[    2.392590] dw_mmc e0043000.dwmmc: Using external DMA controller.
+[    2.670469] ttyPS0 - failed to request DMA
+[    4.809854] u_dma_buf: loading out-of-tree module taints kernel.
+[    4.869294] u-dma-buf udmabuf0: driver version = 3.2.5
+[    4.874447] u-dma-buf udmabuf0: major number   = 242
+[    4.879426] u-dma-buf udmabuf0: minor number   = 0
+[    4.879439] u-dma-buf udmabuf0: phys address   = 0x0000000030100000
+[    4.890495] u-dma-buf udmabuf0: buffer size    = 134217728
+[    4.896002] u-dma-buf udmabuf@0: driver installed.
+--- [end]
+
+===== device tree npu =====
+--- $ find /proc/device-tree -maxdepth 3 \( -iname '*npu*' -o -iname '*zg*' -o -iname '*icraft*' -o -iname '*ai70*' \) 2>/dev/null | head -20; echo '(empty => NPU has no DT node, expected for /dev/mem access)'
+(empty => NPU has no DT node, expected for /dev/mem access)
+--- [end]
+
+===== reserved memory =====
+--- $ dmesg 2>/dev/null | grep -i -E 'reserved|memory@|cma|MemBlock|memory block' | tail -15
+[    0.000000] cma: Reserved 256 MiB at 0x0000000030000000
+[    0.000000]   DMA32 zone: 0 pages reserved
+[    0.000000] Memory: 754924K/1048576K available (9022K kernel code, 498K rwdata, 2596K rodata, 640K init, 285K bss, 31508K reserved, 262144K cma-reserved)
+--- [end]
+
+===== libicraft files =====
+--- $ ls -l /usr/lib/libicraft* /usr/lib/*/libicraft* /usr/local/lib/libicraft* /opt/*/lib*/libicraft* 2>&1
+ls: cannot access '/usr/lib/libicraft*': No such file or directory
+ls: cannot access '/usr/local/lib/libicraft*': No such file or directory
+ls: cannot access '/opt/*/lib*/libicraft*': No such file or directory
+-rwxrwxr-x 1 root root   609360 Apr  3 14:22 /usr/lib/aarch64-linux-gnu/libicraft_buyi_sim.so
+-rwxrwxr-x 1 root root  1093304 Apr  3 14:22 /usr/lib/aarch64-linux-gnu/libicraft_buyibackend.so
+-rwxrwxr-x 1 root root 21066472 Apr  3 14:22 /usr/lib/aarch64-linux-gnu/libicraft_hostbackend.so
+-rwxrwxr-x 1 root root   485368 Apr  3 14:22 /usr/lib/aarch64-linux-gnu/libicraft_pl_sim.so
+-rwxrwxr-x 1 root root  1169928 Apr  3 14:22 /usr/lib/aarch64-linux-gnu/libicraft_utils.so
+-rwxrwxr-x 1 root root  8601624 Apr  3 14:22 /usr/lib/aarch64-linux-gnu/libicraft_xir.so
+-rwxrwxr-x 1 root root  3304768 Apr  3 14:22 /usr/lib/aarch64-linux-gnu/libicraft_xir_serialize_flatbuffers.so
+-rwxrwxr-x 1 root root  1306080 Apr  3 14:22 /usr/lib/aarch64-linux-gnu/libicraft_xrt.so
+-rwxrwxr-x 1 root root  1012536 Apr  3 14:22 /usr/lib/aarch64-linux-gnu/libicraft_zg330backend.so
+--- [end]
+
+===== ldconfig icraft =====
+--- $ ldconfig -p 2>/dev/null | grep -i -E 'icraft|xrt|zg330'
+	libsocketzg330aiu.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libsocketzg330aiu.so
+	libmockzg330.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libmockzg330.so
+	libicraft_zg330backend.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libicraft_zg330backend.so
+	libicraft_xrt.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libicraft_xrt.so
+	libicraft_xir_serialize_flatbuffers.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libicraft_xir_serialize_flatbuffers.so
+	libicraft_xir.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libicraft_xir.so
+	libicraft_utils.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libicraft_utils.so
+	libicraft_pl_sim.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libicraft_pl_sim.so
+	libicraft_hostbackend.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libicraft_hostbackend.so
+	libicraft_buyibackend.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libicraft_buyibackend.so
+	libicraft_buyi_sim.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libicraft_buyi_sim.so
+	libaxizg330aiu.so (libc6,AArch64) => /lib/aarch64-linux-gnu/libaxizg330aiu.so
+--- [end]
+
+===== dpkg icraft =====
+--- $ dpkg -l 2>/dev/null | grep -i -E 'icraft|zg330|npu|icraft' | head -20
+ii  customop                       3.36.1                            arm64        This is Icraft CustomOp for arm64
+ii  icraft                         3.36.1                            arm64        This is Icraft for arm64
+ii  libavdevice58:arm64            7:4.2.7-0ubuntu0.1                arm64        FFmpeg library for handling input and output devices - runtime files
+ii  libxi6:arm64                   2:1.7.10-0ubuntu1                 arm64        X11 Input extension library
+--- [end]
+
+===== python icraft =====
+--- $ python3 -c 'import icraft,sys;print("icraft:",getattr(icraft,"__file__",None))' 2>&1; python3 -c 'import xrt,sys;print("xrt:",getattr(xrt,"__file__",None))' 2>&1
+icraft: /usr/local/lib/python3.8/dist-packages/icraft/__init__.py
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'xrt'
+--- [end]
+
+===== icraft env vars =====
+--- $ env | grep -i -E 'icraft|xrt|zg330|npu|LC_ALL|LANG' | sort
+--- [end]
+
+===== clock summary =====
+--- $ mount | grep -q debugfs || echo '(debugfs not mounted)'; head -30 /sys/kernel/debug/clk/clk_summary 2>&1
+                                 enable  prepare  protect                                duty
+   clock                          count    count    count        rate   accuracy phase  cycle
+---------------------------------------------------------------------------------------------
+ ps_clk                               3        3        0    50000000          0     0  50000
+    iopll_int                         2        2        0  1000000000          0     0  50000
+       gtc_mux0                       1        1        0  1000000000          0     0  50000
+          gtc_div                     1        1        0   100000000          0     0  50000
+             gtc_mux1                 1        1        0   100000000          0     0  50000
+                gtc                   1        1        0   100000000          0     0  50000
+       iopll                          1        1        0  1000000000          0     0  50000
+          iopll_clk                   6        6        0  1000000000          0     0  50000
+             usb1_mux                 0        0        0  1000000000          0     0  50000
+                usb1_div              0        0        0    21276596          0     0  50000
+                   usb1               0        0        0    21276596          0     0  50000
+             usb0_mux                 1        1        0  1000000000          0     0  50000
+                usb0_div              1        1        0   200000000          0     0  50000
+                   usb0               1        1        0   200000000          0     0  50000
+             ts_mux                   0        0        0  1000000000          0     0  50000
+                ts_div                0        0        0   250000000          0     0  50000
+                   tracets            0        0        0   250000000          0     0  50000
+             sdio_mux                 1        1        0  1000000000          0     0  50000
+                sdio_div              1        1        0   100000000          0     0  50000
+                   sdio1              0        0        0   100000000          0     0  50000
+                   sdio0              1        1        0   100000000          0     0  50000
+             qspi_mux                 1        1        0  1000000000          0     0  50000
+                qspi_div              1        1        0   200000000          0     0  50000
+                   qspi               1        1        0   200000000          0     0  50000
+             spi_mux                  1        1        0  1000000000          0     0  50000
+                spi1                  1        1        0  1000000000          0     0  50000
+                spi0                  0        0        0  1000000000          0     0  50000
+--- [end]
+
+########## S5  SERVICE / DEMO STATE  (glc-demo and friends) ##########
+
+===== glc-demo unit =====
+--- $ systemctl cat glc-demo 2>&1 | head -30
+# Warning: glc-demo.service changed on disk, the version systemd has loaded is outdated.
+# This output shows the current version of the unit's original fragment and drop-in files.
+# If fragments or drop-ins were added or removed, they are not properly reflected in this output.
+# Run 'systemctl daemon-reload' to reload units.
+# /etc/systemd/system/glc-demo.service
+[Unit]
+Description=GLC demo autostart (Wujing Lite FMQL30TAI)
+Documentation=file:/root/glc/autostart.sh
+After=rc-local.service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/glc
+ExecStart=/bin/sh /root/glc/autostart.sh
+Restart=on-failure
+RestartSec=10
+# 注意：日志**只由 autostart.sh 自己写** /root/demo.log。
+# 这里若再加 StandardOutput=append:/root/demo.log，就会有两个写入者（systemd 和脚本的 >>），
+# 各自持有文件偏移 → 日志中间出现 NUL 空洞（实测 71 个 NUL）。所以这里只送 journal。
+StandardOutput=journal
+StandardError=journal
+
+# 救援（任何时候都能从串口或 SSH 执行，不影响网络/getty）：
+#   systemctl stop glc-demo        停本次
+#   systemctl disable glc-demo     永久关（重启也不跑）
+#   systemctl enable --now glc-demo 重新打开
+
+[Install]
+WantedBy=multi-user.target
+
+--- [end]
+
+===== glc-demo status =====
+--- $ systemctl is-enabled glc-demo 2>&1; systemctl is-active glc-demo 2>&1; systemctl status glc-demo --no-pager 2>&1 | head -20
+enabled
+active
+Warning: The unit file, source configuration file or drop-ins of glc-demo.service changed on disk. Run 'systemctl daemon-reload' to reload units.
+● glc-demo.service - GLC demo autostart (Wujing Lite FMQL30TAI)
+     Loaded: loaded (/etc/systemd/system/glc-demo.service; enabled; vendor preset: enabled)
+    Drop-In: /etc/systemd/system/glc-demo.service.d
+             └─override.conf
+     Active: active (running) since Tue 2026-09-22 14:18:56 UTC; 4min 52s ago
+       Docs: file:/root/glc/autostart.sh
+   Main PID: 186 (python3)
+     CGroup: /system.slice/glc-demo.service
+             ├─186 python3 -u /root/glc/run_demo.py
+             ├─305 /bin/sh -c cd /root/tp5603_drv/glcdec && python3 -u decode_batch.py /root/glc/pack/rxs --linger 86400
+             ├─309 python3 -u decode_batch.py /root/glc/pack/rxs --linger 86400
+             └─313 python3 -u /root/tp5603_drv/glcdec/glc_view.py serve --dir /root/glc/pack/rxs --keysrc fifo:/tmp/glc_keys;evdev --interval 0.05 --check-every 2
+
+Sep 22 14:18:56 U.FMSH systemd[1]: Started GLC demo autostart (Wujing Lite FMQL30TAI).
+--- [end]
+
+===== safe_restart.sh =====
+--- $ ls -l /root/safe_restart.sh 2>&1; echo '--- content:'; cat /root/safe_restart.sh 2>/dev/null | head -60
+-rw-r--r-- 1 root root 791 Sep 22 14:19 /root/safe_restart.sh
+--- content:
+#!/bin/sh
+# safe_restart.sh -- 安全重启演示栈：先停 -> 等进程真的退出 -> 再起
+#   为什么：直接 systemctl restart 时旧进程可能还持有 xrt/NPU 句柄，新进程立刻打开设备
+#   => 两个客户端重叠 => PS 侧挂死（今天实测 3 次）
+set -e
+echo "[1] stop glc-demo"
+systemctl stop glc-demo || true
+echo "[2] 等进程真正退出（最多 30 s）"
+i=0
+n=1
+while [ $i -lt 30 ]; do
+  n=$(pgrep -fc 'decode_batc[h]|glc_view[.]py|run_demo[.]py|radio_rx_serve' 2>/dev/null || true)
+  [ -z "$n" ] && n=0
+  [ "$n" -eq 0 ] && break
+  sleep 1
+  i=$((i+1))
+done
+echo "    剩余进程数 = $n（等了 ${i}s）"
+echo "[3] 清残留标记"
+rm -f /dev/shm/glc_decoding
+echo "[4] start glc-demo"
+systemctl start glc-demo
+sleep 3
+systemctl is-active glc-demo
+--- [end]
+
+===== demo log tail =====
+--- $ ls -l /root/demo.log 2>&1; tail -40 /root/demo.log 2>&1
+-rw-r--r-- 1 root root 1030265 Sep 22 14:23 /root/demo.log
+[BOOT 2026-09-22 14:19:30]   [BATCH] READY ⇒ 开始暖机（只影响第一张快慢，不影响结果）…
+[BOOT 2026-09-22 14:19:30]   [BATCH] 暖机用：s031_rx1.glc
+[BOOT 2026-09-22 14:19:30]     容器 s031_rx1.glc: q=0 尺寸=256x256 latent=256x16x16 z=256x4x4 streams=5
+[BOOT 2026-09-22 14:19:32]       [resident] load s2     raw   14.5 MB  json  0.29 + lazy   0.79 =   1.07 s  RSS 365 MB
+[BOOT 2026-09-22 14:19:34]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K
+[BOOT 2026-09-22 14:19:35]       [resident] load s3p1   raw    9.0 MB  json  0.26 + lazy   0.44 =   0.71 s  RSS 316 MB
+[BOOT 2026-09-22 14:19:37]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K
+[BOOT 2026-09-22 14:19:38]       [resident] load s3p2   raw    9.0 MB  json  0.23 + lazy   0.44 =   0.67 s  RSS 327 MB
+[BOOT 2026-09-22 14:19:40]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K
+[BOOT 2026-09-22 14:19:41]       [resident] load s3p3   raw    9.0 MB  json  0.24 + lazy   0.44 =   0.68 s  RSS 337 MB
+[BOOT 2026-09-22 14:19:43]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K
+[BOOT 2026-09-22 14:19:43]     熵解码合计 63.7 ms
+[BOOT 2026-09-22 14:19:43] 监听#2: ✗ 没找到电台串口 ⇒ 30 s 后重试
+[BOOT 2026-09-22 14:19:45]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K
+[BOOT 2026-09-22 14:19:51]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K
+[BOOT 2026-09-22 14:19:54]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K
+[BOOT 2026-09-22 14:20:13] 看门狗: 监听=OK 解码=OK 内存=451/993MB icraft=0
+[BOOT 2026-09-22 14:20:14] 监听#3: ✗ 没找到电台串口 ⇒ 30 s 后重试
+[BOOT 2026-09-22 14:20:23]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K
+[BOOT 2026-09-22 14:20:23]         [chain] s4b3 溢出 ⇒ 就地切 tf32 版重跑（不整链重来）
+[BOOT 2026-09-22 14:20:45] 监听#4: ✗ 没找到电台串口 ⇒ 30 s 后重试
+[BOOT 2026-09-22 14:20:50]       [resident] load s4b3_tf32 raw  431.4 MB  json  0.34 + lazy  26.55 =  26.89 s  RSS 412 MB
+[BOOT 2026-09-22 14:20:50]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K
+[BOOT 2026-09-22 14:21:13]   [2K[2K[2K[2K      [chain] s4b3(tf32) -> (1, 128, 256, 256)  min=inf max=inf   <== 仍溢出 ✗
+[BOOT 2026-09-22 14:21:13] 看门狗: 监听=OK 解码=OK 内存=365/993MB icraft=0
+[BOOT 2026-09-22 14:21:16] 监听#5: ✗ 没找到电台串口 ⇒ 30 s 后重试
+[BOOT 2026-09-22 14:21:21]   [2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K[2K      [chain] s4b4  -> (1
+[BOOT 2026-09-22 14:21:22]     已存 PNG: /tmp/glc_warm/warm.png
+[BOOT 2026-09-22 14:21:22]     总耗时 111.4 s
+[BOOT 2026-09-22 14:21:22]   [BATCH] 暖机完成 111.6 s（此后每张都走热路径）
+[BOOT 2026-09-22 14:21:22]   [BATCH] (后台) load s4b3_tf32     0.0 s ✓ ⇒ 之后溢出回退无需等待[BATCH] 已安排后台装载：s4b3_tf32（不阻塞 READY，不占解码）
+[BOOT 2026-09-22 14:21:22]   [BATCH] 开机常驻模式：先空转等新图（模型已就绪 ⇒ 之后每张只要 5~6 s）
+[BOOT 2026-09-22 14:21:22]   [BATCH] (后台) 备用网装载完毕 ⇒ 之后任何图都不会再等装载 ✓
+[BOOT 2026-09-22 14:21:47] 监听#6: ✗ 没找到电台串口 ⇒ 30 s 后重试
+[BOOT 2026-09-22 14:22:13] 看门狗: 监听=OK 解码=OK 内存=297/993MB icraft=0
+[BOOT 2026-09-22 14:22:17] 监听#7: ✗ 没找到电台串口 ⇒ 30 s 后重试
+[BOOT 2026-09-22 14:22:48] 监听#8: ✗ 没找到电台串口 ⇒ 30 s 后重试
+[BOOT 2026-09-22 14:23:13] 看门狗: 监听=OK 解码=OK 内存=296/993MB icraft=0
+[BOOT 2026-09-22 14:23:18] 监听#9: ✗ 没找到电台串口 ⇒ 30 s 后重试
+--- [end]
+
+===== running services =====
+--- $ systemctl list-units --type=service --state=running --no-pager --no-legend 2>/dev/null | head -25
+cron.service              loaded active running Regular background program processing daemon
+dbus.service              loaded active running D-Bus System Message Bus                    
+getty@tty1.service        loaded active running Getty on tty1                               
+getty@ttyPS0.service      loaded active running Getty on ttyPS0                             
+glc-demo.service          loaded active running GLC demo autostart (Wujing Lite FMQL30TAI)  
+rsyslog.service           loaded active running System Logging Service                      
+ssh.service               loaded active running OpenBSD Secure Shell server                 
+systemd-journald.service  loaded active running Journal Service                             
+systemd-logind.service    loaded active running Login Service                               
+systemd-resolved.service  loaded active running Network Name Resolution                     
+systemd-timesyncd.service loaded active running Network Time Synchronization                
+user@0.service            loaded active running User Manager for UID 0                      
+--- [end]
+
+===== journal err =====
+--- $ journalctl -b -p err --no-pager 2>/dev/null | tail -30
+-- Logs begin at Thu 2023-03-02 12:58:02 UTC, end at Tue 2026-09-22 16:12:45 UTC. --
+Sep 22 14:18:50 U.FMSH rsyslogd[135]: file '/var/log/syslog': open error: Permission denied [v8.2001.0 try https://www.rsyslog.com/e/2433 ]
+Sep 22 14:20:18 U.FMSH systemd[1]: Timed out waiting for device /dev/ttyPS0.
+--- [end]
+
+===== root listing =====
+--- $ ls -la /root 2>&1 | head -40
+total 24008
+drwx-----x 49 root root   16384 Sep 22 14:20 .
+drwxr-xr-x 17 root root    4096 Mar 13  2026 ..
+-rw-------  1 root root      52 Mar 13  2026 .Xauthority
+-rw-------  1 root root   31198 Sep 22  2026 .bash_history
+-rw-r--r--  1 fmsh fmsh    3864 Sep 22 14:19 .bashrc
+drwxr-xr-x  4 root root    4096 Sep 22 14:12 .cache
+drwxr-xr-x  2 root root    4096 Mar 13  2026 .conda
+drwxr-xr-x  5 root root    4096 Mar 13  2026 .config
+-rw-r--r--  1 fmsh fmsh     161 Dec  5  2019 .profile
+-rw-------  1 root root     304 Oct 31  2022 .python_history
+drwx------  2 root root    4096 Mar 13  2026 .ssh
+drwxr-xr-x  2 root root    4096 Sep 22 14:22 .vim
+-rw-------  1 root root   15114 Sep 22  2026 .viminfo
+-rw-r--r--  1 root root       0 Sep 22  2026 =
+-rw-r--r--  1 root root    6628 Sep 22  2026 A_send.py
+-rw-r--r--  1 root root     132 Sep 22 14:19 BOARD_ROLE.txt
+drwxr-xr-x  2 root root    4096 Sep 22  2026 __pycache__
+-rwxr-xr-x  1 root root 3322032 Sep 22  2026 adder_demo
+-rw-r--r--  1 root root     855 Sep 22 14:21 addr.out
+-rw-r--r--  1 root root     865 Sep 22 14:21 addr_stdout.txt
+-rwxr-xr-x  1 root root    2717 Sep 22 14:22 after_reboot.sh
+-rwxr-xr-x  1 root root    2581 Sep 22 14:22 after_reboot.sh.bak_before_md5fix
+-rw-r--r--  1 root root     824 Sep 22 14:20 apply_safe_env.sh
+drwxr-xr-x  2 root root    4096 Sep 22  2026 backup
+-rw-r--r--  1 root root     475 Sep 22  2026 base0.log
+-rw-r--r--  1 root root   58944 Sep 22  2026 base0.png
+-rw-r--r--  1 root root     505 Sep 22  2026 base1.log
+-rw-r--r--  1 root root 1049082 Sep 22  2026 base1.npz
+-rw-r--r--  1 root root  124468 Sep 22  2026 base1.png
+-rw-r--r--  1 root root     475 Sep 22  2026 base2.log
+-rw-r--r--  1 root root  127005 Sep 22  2026 base2.png
+-rw-r--r--  1 root root     475 Sep 22  2026 base3.log
+-rw-r--r--  1 root root     758 Sep 22  2026 base3.png
+-rw-r--r--  1 root root    1212 Sep 22  2026 baseline_exact.sh
+-rwxr-xr-x  1 root root    9746 Sep 22 14:23 bcheck.sh
+-rw-r--r--  1 root root   34079 Sep 22 14:23 bcheck_A.txt
+-rw-r--r--  1 root root    2129 Sep 22  2026 board_iface_probe.sh
+-rw-r--r--  1 root root    2028 Sep 22  2026 board_iface_probe2.sh
+-rw-r--r--  1 root root    1713 Sep 22  2026 board_iface_probe3.sh
+--- [end]
+
+===== tmpfs usage =====
+--- $ df -h /dev/shm /tmp /run 2>&1
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           497M  204M  294M  41% /dev/shm
+/dev/root        26G   15G  9.9G  60% /
+tmpfs           100M   72K  100M   1% /run
+--- [end]
+
+########## S6  NOT EXECUTED -- THE LANDMINES ##########
+The following were deliberately NOT run by this script.
+Read them out loud before anyone types them by hand:
+
+  1) busybox devmem 0x40040000      -> wedged the PS bus on OUR SAME BOARD
+                                       (documented: A-side 03 / 21). Board
+                                       then requires a POWER CYCLE.
+  2) any devmem sweep 0x4000_0000.. -> same class of landmine.
+  3) echo <x>.bin > fpga_manager/firmware  while glc-demo is ACTIVE
+                                       -> AXI traffic in flight during a
+                                          reconfig => PS AXI hang.
+                                       MUST `systemctl stop glc-demo` first.
+  4) systemctl restart glc-demo     -> not allowed; use
+                                       `sh /root/safe_restart.sh`.
+  5) anything that re-flashes BOOT.bin / mtd  -> one-way, no undo here.
+
+Rule that came out of our own two hangs: a register window is only
+"known" if some piece of the vendor runtime already reads it. Everything
+else is 0x40040000 until proven otherwise.
+
+########## END ##########
+
+written: /root/bcheck_A.txt  (37696 bytes)  md5=bcc0dfe361b7727ebefe8865f0a7f7fd

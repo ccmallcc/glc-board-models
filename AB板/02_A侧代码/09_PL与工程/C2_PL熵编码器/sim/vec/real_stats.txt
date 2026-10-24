@@ -1,0 +1,8 @@
+n_logical 16384
+n_rans_syms 16384
+n_escape 0
+n_bypass_syms 0
+max_raw 0
+max_n_bypass 0
+out_of_domain 0
+payload_bytes 60
