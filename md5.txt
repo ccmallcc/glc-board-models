@@ -1,0 +1,10 @@
+636a7b9e361b4d4ab35534bef6323c8b  models/s1_encoder_ga_hyper_ZG.json
+5ffb6b8073d683c4f207b433c0b1511a  models/s1_encoder_ga_hyper_ZG.raw
+0cabc5be7823ee70abd9159ee64523cf  models/s2_hyperdec_fusion_ZG.json
+6d63332642d4b3904ed0a63e4fdf22db  models/s2_hyperdec_fusion_ZG.raw
+330602986116b77daaf8de3f48136a7b  models/s3_phase1_ZG.json
+40bd8b3b455160a9dba47e246652242d  models/s3_phase1_ZG.raw
+8303d357e6fdc43e3277d1acea12df29  models/s3_phase2_ZG.json
+ddb4164b660f1705d9e0ddee4c57e44e  models/s3_phase2_ZG.raw
+e0e7b9b94112917042c1caf85e438b1a  models/s3_phase3_ZG.json
+a5a515f0a5733a4cc688f54b98ea9e87  models/s3_phase3_ZG.raw
