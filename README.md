@@ -11,7 +11,16 @@
 
 ## 一、模型文件（Release 资产）
 
-下载 `glc_models_20261024.tar.gz`（约 200 MB），解压得到 `models/`：
+**下载**（52 MB 压缩包，解压后约 202 MB）：
+
+<https://github.com/ccmallcc/glc-board-models/releases/download/v2026.10.24/glc_models_20261024.tar.gz>
+
+| 项 | 值 |
+|---|---|
+| 压缩包大小 | **54,879,881 B**（52.3 MB） |
+| 压缩包 md5 | **`caeecddb0166f81e93c70cfbfc1eafe2`** |
+
+解压后 `models/` 里的 10 个文件：
 
 | 文件 | 字节 | md5 |
 |---|---|---|
