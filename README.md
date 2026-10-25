@@ -4,7 +4,9 @@
 
 1. **板端模型**：A 侧板子上跑的那 10 个 `*_ZG.json/.raw`，**逐字节一致**（有 md5 表可核）。
    体积约 202 MB，放在 **Releases** 里（`glc_models_20261024.tar.gz`），不在 git 历史里。
-2. **解码一致性校验向量**：一个 308 B 的容器 + 原图 + 参考解码，用来判定"解码对不对"。
+2. **解码一致性校验向量**：两组，口径不同，**不能混用** ——
+   [`verify/`](verify/README.md)（fp32 参考链，308 B / 26.61 dB）与
+   [`verify-int8/`](verify-int8/README.md)（板端 int8 链，312–324 B / 21.60 dB）。
 3. **双方沟通通道**：`channel/` —— A 写 `channel/A/`，B 写 `channel/B/`，一条消息一个 md。
    规则见 [`channel/README.md`](channel/README.md)。
 
