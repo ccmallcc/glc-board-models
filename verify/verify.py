@@ -1,73 +1,124 @@
 # -*- coding: utf-8 -*-
-"""校验 B 端解码结果是否与 A 侧参考实现一致。
+"""校验**你的解码器**从 GLC2 int8 容器解出来的图，是否与 A 侧参考解码一致。
 
 用法::
 
-    python verify.py 你们的解码输出.png
+    python verify.py 你的解码.png            # 自动挑最接近的样本
+    python verify.py 你的解码.png 2          # 指定样本 2
 
-判据：PSNR ≥ 24 dB、每通道均值差 ≤ 6、偏色指标 |R−G| ≤ 20。
-不通过时会打印每通道的 y=a·x+b 拟合，并给出最可能的原因。
+判据
+----
+主判据：与 `full_img{k}_rec.png` 的 PSNR。
+
+    ≥ 40 dB   逐像素基本一致（只差 fp32 S4 的末位）      PASS
+    32~40 dB  有可见但可接受的差异，通常是 S4 实现不同    PASS（会提示）
+    < 32 dB   解错了                                        FAIL
+
+参考尺度（实测）：解错一个相位就有 ~13~15 dB；完全解不开是 NaN。
+所以 32 dB 这条线离"对的"和"错的"都很远，判据不敏感于阈值取多少。
+
+同时打印每通道均值与 R-G（偏色指标），只用于定位，不参与判定。
 """
+import os
 import sys
 
 import numpy as np
 from PIL import Image
 
-REF = 'rec.png'
-PSNR_MIN = 24.0
-MEAN_TOL = 6.0
-RG_TOL = 20.0
+# Windows 控制台常是 GBK，个别符号会让 print 直接崩，这里兜住
+try:
+    sys.stdout.reconfigure(errors="replace")
+except Exception:
+    pass
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+SAMPLES = [0, 1, 2, 3]
+PSNR_PASS = 40.0
+PSNR_WARN = 32.0
+
+
+def psnr(a, b):
+    mse = float(((a.astype(np.float64) - b.astype(np.float64)) ** 2).mean())
+    return 99.0 if mse <= 0 else 10.0 * np.log10(255.0 ** 2 / mse)
+
+
+def load(path):
+    return np.asarray(Image.open(path).convert("RGB"))
 
 
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
         return 2
-    got = Image.open(sys.argv[1]).convert('RGB')
-    ref = Image.open(REF).convert('RGB')
-    if got.size != ref.size:
-        got = got.resize(ref.size, Image.LANCZOS)
-        print('[!] 尺寸不同，已缩放到 %s 再比' % (ref.size,))
-    g = np.asarray(got, dtype=np.float64)
-    r = np.asarray(ref, dtype=np.float64)
+    got = load(sys.argv[1])
 
-    mse = float(((g - r) ** 2).mean())
-    psnr = 99.0 if mse <= 0 else 10 * np.log10(255.0 ** 2 / mse)
-    dm = [abs(g[:, :, i].mean() - r[:, :, i].mean()) for i in range(3)]
-    rg_g = g[:, :, 0].mean() - g[:, :, 1].mean()
-    rg_r = r[:, :, 0].mean() - r[:, :, 1].mean()
+    if len(sys.argv) > 2:
+        try:
+            k = int(sys.argv[2])
+        except ValueError:
+            print(__doc__)
+            return 2
+        if k not in SAMPLES:
+            print("样本号只能是 0/1/2/3")
+            return 2
+        picks = [k]
+        print("指定样本 %d" % k)
+    else:
+        picks = SAMPLES
+        print("未指定样本，四个都试，取最接近的一个")
 
-    print('PSNR        %.2f dB   (判据 ≥ %.0f)' % (psnr, PSNR_MIN))
-    print('通道均值差  R %.1f  G %.1f  B %.1f   (判据 ≤ %.0f)' % (dm[0], dm[1], dm[2], MEAN_TOL))
-    print('偏色 R−G    你的 %+.1f   参考 %+.1f   (判据 |差| ≤ %.0f)'
-          % (rg_g, rg_r, RG_TOL))
-    print('你的均值    R%.1f G%.1f B%.1f' % tuple(g[:, :, i].mean() for i in range(3)))
-    print('参考均值    R%.1f G%.1f B%.1f' % tuple(r[:, :, i].mean() for i in range(3)))
+    best = None
+    for k in picks:
+        ref = load(os.path.join(HERE, "rec", "full_img%d.png" % k))
+        if got.size != ref.size:
+            print("!! 你的图是 %dx%d，参考是 %dx%d —— 尺寸不对，先查反归一化/裁剪"
+                  % (got.shape[1], got.shape[0], ref.shape[1], ref.shape[0]))
+            return 1
+        p = psnr(got, ref)
+        print("  样本 %d   PSNR vs rec.png = %6.2f dB" % (k, p))
+        if best is None or p > best[1]:
+            best = (k, p)
 
-    ok = (psnr >= PSNR_MIN and max(dm) <= MEAN_TOL and abs(rg_g - rg_r) <= RG_TOL)
-    if ok:
-        print('\n==> PASS：与参考实现一致（差异在量化误差范围内）')
+    k, p = best
+    ref = load(os.path.join(HERE, "rec", "full_img%d.png" % k))
+    dm = [abs(float(got[:, :, i].mean()) - float(ref[:, :, i].mean())) for i in range(3)]
+    rg_got = float(got[:, :, 0].mean() - got[:, :, 1].mean())
+    rg_ref = float(ref[:, :, 0].mean() - ref[:, :, 1].mean())
+
+    print()
+    print("最接近：样本 %d" % k)
+    print("  通道均值差  R %.1f  G %.1f  B %.1f" % (dm[0], dm[1], dm[2]))
+    print("  偏色 R-G    你的 %+.1f   参考 %+.1f   （差值 %+.1f）"
+          % (rg_got, rg_ref, rg_got - rg_ref))
+    print()
+
+    if p >= PSNR_PASS:
+        print("==> PASS：与参考解码一致（PSNR %.2f dB）" % p)
+        return 0
+    if p >= PSNR_WARN:
+        print("==> PASS（有差异）：PSNR %.2f dB，低于 %.0f dB，通常是 S4 生成器实现不同"
+              % (p, PSNR_PASS))
+        print("    若你用的是同一份 fp32 S4，这里应该是 40 dB 以上甚至 ∞。")
         return 0
 
-    print('\n==> FAIL：与参考实现不一致')
-    # 每通道线性拟合：你的 = a*参考 + b
-    print('\n每通道拟合（你的输出 = a × 参考 + b）:')
-    for i, n in enumerate('RGB'):
-        x = r[:, :, i].ravel()
-        y = g[:, :, i].ravel()
-        A = np.vstack([x, np.ones_like(x)]).T
-        a, b = np.linalg.lstsq(A, y, rcond=None)[0]
-        sat = (g[:, :, i] >= 250).mean() * 100
-        print('  %s: a=%5.2f  b=%+7.1f   饱和(>=250) %5.1f%%' % (n, a, b, sat))
+    print("==> FAIL：PSNR %.2f dB" % p)
     print("""
-对照这张表定位：
-  · 三通道 a/b 差很多、某通道大量饱和  → 反归一化常数（每通道 mean/std）用错
-  · R 被整体抬高（如 b≈+190）、G 被压缩 → YCoCg / YUV→RGB 的矩阵或偏移写错
-  · 某通道大面积饱和                   → int8 反量化的 scale / zero-point 用错
-  · 仅整体亮度略偏、结构一致            → 正常量化误差，可放宽判据
+按这个顺序查（GLC2 容器不存 scales/means，解码端必须自己重推）：
+
+  1. 先确认容器 md5 —— 见 check.py。不是同一份容器，后面都白搭。
+  2. 你用的 _ZG 子图和发布的是不是同一份？见 MANIFEST.md 里的模型 md5。
+     s2/s3p1-3 四个子图的 json+raw 八个数必须逐个对上。
+  3. 解码用的是不是**同一套 int8 子图**？用 fp32 PyTorch 参考实现去解
+     int8 容器会整段失步（实测 = NaN 或 ~13 dB）。
+  4. 胶水层的 1x1 卷积（768→256）必须用 **float64 累加** 再转 float32，
+     否则末位差会经 S3 的 int8 量化边界放大成符号翻转。见 AB板/
+     02_A侧代码/07_解码端/工具/pc_decode_selfcontained.py 的 conv1x1()。
+  5. HostRunner 的入参是 **NCHW**（内部自己转 NHWC）。转置两次会得到
+     "36%~42% 元素恰好相同" 的假象。
 """)
     return 1
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())
