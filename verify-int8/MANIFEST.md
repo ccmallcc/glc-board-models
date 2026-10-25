@@ -4,7 +4,7 @@
 
 ---
 
-## 1. 向量文件（12 个，共 978 KB）
+## 1. 向量文件（12 个，共 946,137 B ≈ 924 KiB）
 
 | 文件 | 字节 | md5 | 说明 |
 |---|---:|---|---|
@@ -79,7 +79,13 @@ python3 pc_decode_selfcontained.py --glc_dir glc --png_dir src --n 4 --device cu
 - `--glc_dir glc`：只吃容器；
 - `--png_dir src`：只是为了算 PSNR，按文件名排序取第 i 个，正好对上第 i 个样本。
 
-`rec/*.png` 就是这条命令加 `--save_dir rec` 落出来的（md5 `70552bfd…` / 16,545 B 那一版）。
+`rec/*.png` 是用**这一版解码器脚本**加 `--save_dir rec` 落出来的：脚本
+`AB板/02_A侧代码/07_解码端/工具/pc_decode_selfcontained.py`，md5
+`70552bfdd057eed911cbe5331873cbb6`，16,545 B。
+
+> ⚠️ 这个 md5 是**脚本**的，**不是** `rec/*.png` 的 —— 四张 PNG 的 md5 见 §1 表。
+> （2026-10-25 审计 Q32B 第 1 条指出此处措辞有歧义，已改。）
+
 用别的实现产出的图不必逐字节相同，走 `verify.py` 比 PSNR 即可。
 
 ---
