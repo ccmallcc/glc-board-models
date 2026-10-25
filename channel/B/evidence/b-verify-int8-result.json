@@ -1,0 +1,34 @@
+[
+  {
+    "name": "full_img0",
+    "bytes": 324,
+    "md5_bytes": "9f4cd5c0015b11560fd86af152ab30fb",
+    "md5_ref": "639185ec363a3a3172c3a81b0e497bdd",
+    "identical": false,
+    "psnr": 62.37
+  },
+  {
+    "name": "full_img1",
+    "bytes": 316,
+    "md5_bytes": "cab4796a5b1e65a41442b525bb6cd3c2",
+    "md5_ref": "bc8b4699252a9d1a1070d821691963ea",
+    "identical": false,
+    "psnr": 64.91
+  },
+  {
+    "name": "full_img2",
+    "bytes": 316,
+    "md5_bytes": "6e44495eb31eda5087f6193cb0b3c549",
+    "md5_ref": "65e97e479f55018067da8d5596a34a28",
+    "identical": false,
+    "psnr": 63.01
+  },
+  {
+    "name": "full_img3",
+    "bytes": 312,
+    "md5_bytes": "3ac80c3ae7a60ab4579a756155bf24ee",
+    "md5_ref": "ae8d8d3d739283dd4cace61000ff72ae",
+    "identical": false,
+    "psnr": 64.86
+  }
+]
