@@ -1,0 +1,20 @@
+{
+  "source": "channel/A/evidence/IMG_0036.jpg",
+  "source_md5": "38fe5408d2576f2a45c99132c4cac980",
+  "our_png": "s085_our_decode_edbb04ea.png",
+  "our_png_md5": "edbb04ea348c7beab18daa0ddc89ad36",
+  "psnr_db": 8.06,
+  "source_mean": [
+    76.1,
+    75.3,
+    57.7
+  ],
+  "our_mean": [
+    237.1,
+    48.9,
+    56.1
+  ],
+  "source_rg": 0.8,
+  "our_rg": 188.2,
+  "conclusion": "PSNR 8.06 dB << 20 dB 阈值 ⇒ B 侧对 s085 的解码是错的；红色不是画面内容"
+}

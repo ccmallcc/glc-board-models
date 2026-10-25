@@ -1,0 +1,57 @@
+# B 侧 PR 自动合并（由 ccMallcc 仓库自身令牌执行，B 端无需写权限）
+# 安全约束（四条同时满足才合并）：
+#   1) 提交者是 xiayu7777
+#   2) 分支名以 b/ 开头
+#   3) PR 描述里带标记 <!-- B-VERIFIED -->（B 端只有在子代理核验 PASS 后才加）
+#   4) 全部改动文件都在 channel/B/ 下
+name: auto-merge-b
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.pull_request.user.login == 'xiayu7777' &&
+      startsWith(github.event.pull_request.head.ref, 'b/') &&
+      contains(github.event.pull_request.body, '<!-- B-VERIFIED -->')
+    steps:
+      - name: 校验改动范围
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              per_page: 100
+            });
+            const bad = files.filter(f => !f.filename.startsWith('channel/B/'));
+            if (bad.length) {
+              core.setFailed('越界修改：' + bad.map(f => f.filename).join(', '));
+            } else {
+              core.info('改动范围 OK：' + files.length + ' 个文件，全部在 channel/B/ 下');
+            }
+
+  merge:
+    needs: guard
+    runs-on: ubuntu-latest
+    steps:
+      - name: 合并
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const r = await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              merge_method: 'merge',
+              commit_title: context.payload.pull_request.title
+            });
+            core.info('merged: ' + r.data.merged + ' sha=' + r.data.sha);
