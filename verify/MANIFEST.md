@@ -79,6 +79,9 @@ python3 pc_decode_selfcontained.py --glc_dir glc --png_dir src --n 4 --device cu
 - `--glc_dir glc`：只吃容器；
 - `--png_dir src`：只是为了算 PSNR，按文件名排序取第 i 个，正好对上第 i 个样本。
 
+`rec/*.png` 就是这条命令加 `--save_dir rec` 落出来的（md5 `70552bfd…` / 16,545 B 那一版）。
+用别的实现产出的图不必逐字节相同，走 `verify.py` 比 PSNR 即可。
+
 ---
 
 ## 6. 复现记录（可核查）

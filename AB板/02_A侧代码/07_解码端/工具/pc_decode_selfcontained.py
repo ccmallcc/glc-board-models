@@ -83,6 +83,23 @@ def psnr(a, b):
     return 10 * math.log10(4.0 / max(mse, 1e-12))
 
 
+def to_u8(t):
+    arr = t[0].detach().clamp(-1, 1).cpu().numpy().transpose(1, 2, 0)
+    return ((arr + 1.0) * 127.5).round().clip(0, 255).astype(np.uint8)
+
+
+def save_pair(out_dir, stem, rec, src):
+    """落「解码图」与「实际参与比对的那块源图」两张 PNG，并打 md5（验收用）。"""
+    import hashlib
+    os.makedirs(out_dir, exist_ok=True)
+    for tag, t in (("rec", rec), ("src", src)):
+        path = os.path.join(out_dir, "%s_%s.png" % (stem, tag))
+        Image.fromarray(to_u8(t)).save(path)
+        print("    saved %-28s %7d B  md5=%s"
+              % (os.path.basename(path), os.path.getsize(path),
+                 hashlib.md5(open(path, "rb").read()).hexdigest()))
+
+
 class HostRunner(object):
     """在 PC 上用 HostBackend 跑 INT8 `_ZG` 子图。"""
 
@@ -199,6 +216,8 @@ def main():
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--out", default="")
+    ap.add_argument("--save_dir", default="",
+                    help="非空则把每样本的 解码图/参与比对的源图 落成 PNG 并打 md5")
     a = ap.parse_args()
 
     repo = os.path.abspath(a.repo)
@@ -317,6 +336,9 @@ def main():
         x0, y0 = (i * 37) % max(1, w - S), (i * 53) % max(1, h - S)
         px = np.asarray(im.crop((x0, y0, x0 + S, y0 + S)), dtype=np.float32) / 127.5 - 1.0
         x = torch.from_numpy(px.transpose(2, 0, 1)).unsqueeze(0).to(dev)
+
+        if a.save_dir:
+            save_pair(a.save_dir, os.path.splitext(fn)[0], rec, x.clamp(-1, 1))
 
         rows.append(dict(glc=fn, bytes=len(blob), bpp=len(blob) * 8 / (S * S),
                          t_ent_ms=t_ent * 1000, t_s4_ms=t_s4 * 1000,
