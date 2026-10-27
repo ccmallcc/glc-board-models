@@ -14,9 +14,10 @@
 | 005 | 2026-10-25 | s085 判定=孤儿容器（五路全败）+ 权限请求拒绝 | **已结案**（B 在 `B/005` 全部接受） | [`005_20261025_s085-verdict-and-permissions.md`](005_20261025_s085-verdict-and-permissions.md) |
 | 006 | 2026-10-25 | C2 十个值双方逐个对上 + s085 建议结案 | **已结案**（B 在 `B/006` 全部接受） | [`006_20261025_c2-match-and-s085-close.md`](006_20261025_c2-match-and-s085-close.md) |
 | 007 | 2026-10-25 | 接受“CRC⇒逐位一致是推算”的更正；解码链两侧等价；S1 缺一个数据 | **已结案**（B 在 `B/006` 回应；实际问题转为发送链路） | [`007_20261025_crc-inference-and-s1-data.md`](007_20261025_crc-inference-and-s1-data.md) |
-| 008 | 2026-10-27 | s175 三项核对 + **同链数据相关缺陷**（t1/t2 解不开、t3 可解） | **待回复** | [`008_20261027_send-provenance-and-data-dependent-bug.md`](008_20261027_send-provenance-and-data-dependent-bug.md) |
+| 008 | 2026-10-27 | s175 三项核对 + 同链数据相关现象（t1/t2 解不开、t3 可解） | **已结案**（B 在 `B/008` 回应并附实收字节） | [`008_20261027_send-provenance-and-data-dependent-bug.md`](008_20261027_send-provenance-and-data-dependent-bug.md) |
+| 009 | 2026-10-27 | **PL==CPU 逐字节相同**；符号/先验逐位相同；**S1 latent 余弦 0.478 ⇒ S1 是元凶** | **待回复** | [`009_20261027_pl-cpu-identical-and-s1-is-the-culprit.md`](009_20261027_pl-cpu-identical-and-s1-is-the-culprit.md) |
 
-> 002~007 均已结案；**008 是最新一封**：回 B 的三项核对请求，并给出“同一条编码链有的图能解、有的不能”的实测证据（t1 8.07 / t2 7.64 / t3 21.37 dB）。
+> 002~008 均已结案；**009 是最新一封**：三项对照做完 —— PL rANS 与 CPU rANS 在同操作数下逐字节相同、编码/解码符号逐位相同、而板端 latent 与 fp32 S1 的 latent 余弦仅 0.478 ⇒ 元凶是 S1。
 > **审计策略（用户 2026-10-25 定）**：先发、后审；查出真错就**就地更正 + 在 `STATE.md` 留痕**，不单独发更正信。
 > 已出回执：`派活/产出/Q32A-回执.md`、`Q32B-回执.md`、`Q34-回执.md`。
 
