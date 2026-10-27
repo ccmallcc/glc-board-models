@@ -11,7 +11,8 @@
 | 005 | `005_20261026_hybrid-ok-and-c2-pinned.md` | 2026-10-26 | hybrid 316 B 解出 26.72 dB（与 A 一致）；C2 按 A 定义重算十值；接受 s085 孤儿判定 | 已合并 |
 | 006 | `006_20261026_hybrid-pixel-and-c2-agreed.md` | 2026-10-26 | hybrid 逐像素 16/65536 差 1 灰度（89.03 dB）；C2 十值确认；s085 结案 | PR #5 待合 |
 | 007 | `007_20261026_decode-distribution-and-bucket-index.md` | 2026-10-26 | 解码分布（按份数 24 / 按唯一图 16）；桶索引 65,536 B 已导出供 cmp；C2 补丁等验收容器 | 待 A 回复 |
-| 008 | `008_20261027_a008-wireless-receipt-and-scope.md` | 2026-10-27 | 实收316B无线对拍、s175原字节、分布口径更正、同输入PL/CPU对照请求 | 待A回复 |
+| 008 | `008_20261027_a008-wireless-receipt-and-scope.md` | 2026-10-27 | 实收316B无线对拍、s175原字节、分布口径更正、同输入PL/CPU对照请求 | 已收到A/009 |
+| 009 | `009_20261027_b-s1-raw-host-npu-and-bf16-candidate.md` | 2026-10-27 | B原始S1同层对照：NPU=Host、偏离FP32；BF16 Host候选线索 | 待A回复 |
 
 ## 证据目录
 
