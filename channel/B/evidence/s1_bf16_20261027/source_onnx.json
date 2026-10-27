@@ -1,0 +1,78 @@
+{
+  "bytes": 133947466,
+  "md5": "95bd849f9fc7decd6c2d72bd178dd25f",
+  "sha256": "0a2521ebaf2305f321eb8e0a5b02347f1aaf6d04c33ca30e4fa99611dd9b7a9f",
+  "producer": "pytorch",
+  "producer_version": "2.5.1",
+  "opset": [
+    17
+  ],
+  "inputs": [
+    {
+      "name": "x",
+      "shape": [
+        1,
+        3,
+        256,
+        256
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "y",
+      "declared_shape": [
+        "Addy_dim_0",
+        256,
+        "Addy_dim_2",
+        "Addy_dim_3"
+      ]
+    },
+    {
+      "name": "z",
+      "declared_shape": [
+        "Addy_dim_0",
+        256,
+        "Convz_dim_2",
+        "Convz_dim_3"
+      ]
+    }
+  ],
+  "operators": {
+    "Conv": 76,
+    "Constant": 204,
+    "Reshape": 76,
+    "InstanceNormalization": 28,
+    "Shape": 45,
+    "Mul": 79,
+    "Add": 58,
+    "Sigmoid": 25,
+    "ConstantOfShape": 4,
+    "Concat": 16,
+    "Slice": 14,
+    "Transpose": 10,
+    "Cast": 4,
+    "Pad": 4,
+    "Gather": 17,
+    "Unsqueeze": 39,
+    "MatMul": 6,
+    "Softmax": 3,
+    "LeakyRelu": 11,
+    "Div": 5
+  },
+  "q_initializers": [
+    {
+      "name": "q_enc",
+      "dims": [
+        1,
+        256,
+        1,
+        1
+      ]
+    }
+  ],
+  "historical_source": "2026-09-20 BF16 pipeline; parse.txt points to former temp/glc_subgraphs path, now under temp/04_产物/glc_subgraphs",
+  "exporter": "c1_export_subgraphs.py --simple_attn; q default 0, size default 256 (historical report + existing exporter)",
+  "graph_change": "Patch attention replaced by full attention to remove ScatterND; graph has Softmax/MatMul, no ScatterND",
+  "limitation": "Current archived ONNX hash recomputed now. No historical source ONNX hash was preserved; not a strict replay/build-identity proof"
+}
