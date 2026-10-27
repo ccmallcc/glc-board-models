@@ -1,0 +1,183 @@
+{
+  "method": "Read-only B catalog and existing production PL/NPU output; no decoder modifications",
+  "sample": "s177_rx1",
+  "input": {
+    "bytes": 316,
+    "md5": "21654a58efefcecbfdf33a0ad926d53c",
+    "sha256": "7f9888c0f18e527eddcc14ab231483b0d26285513b5e083b742a42c1f4f5781b"
+  },
+  "png": {
+    "bytes": 119576,
+    "md5": "6b43bc80ea2f244323a51455e2043b4f",
+    "sha256": "36d5c72a2678968c3ec77b95f82bf34b357cc26863c88262b8fd2f438e31a1cb"
+  },
+  "input_exact_vs_peer": true,
+  "png_exact_vs_previously_user_verified": true,
+  "source_stream_lengths": [
+    28,
+    64,
+    56,
+    48,
+    44
+  ],
+  "catalog": {
+    "files": 12,
+    "container_valid": 11,
+    "png_valid": 11,
+    "quality_success_rate": "Not measured: no original/source correspondence for all retained photos",
+    "population": "Currently retained catalog, includes local reencoding and 15-byte invalid test input; not an unbiased wireless success rate"
+  },
+  "measured_production_seconds": 4.679838418960571,
+  "pl_calls": 4,
+  "pl_symbols": 65536,
+  "prior_models": [
+    {
+      "name": "s2_hyperdec_fusion_ZG.json",
+      "bytes": 145841,
+      "md5": "0cabc5be7823ee70abd9159ee64523cf",
+      "sha256": "ed871d70d5c210c9ab7ecd16b971bc249b7feb5b64b912b1010fd8f737741697"
+    },
+    {
+      "name": "s2_hyperdec_fusion_ZG.raw",
+      "bytes": 15154732,
+      "md5": "6d63332642d4b3904ed0a63e4fdf22db",
+      "sha256": "5f922b98ad378539830c4fb9029fd1447f12bca0611903931dea13cdc926c331"
+    },
+    {
+      "name": "s3_phase1_ZG.json",
+      "bytes": 148912,
+      "md5": "330602986116b77daaf8de3f48136a7b",
+      "sha256": "86a05afe8cf9d065b2df9fa01cf86750c167ba4c09db42b73df76d2a043bfb35"
+    },
+    {
+      "name": "s3_phase1_ZG.raw",
+      "bytes": 9427172,
+      "md5": "40bd8b3b455160a9dba47e246652242d",
+      "sha256": "c12b6295ab4842e33b52ea47787270553bb79fca250e1de513e1365df0eb06dc"
+    },
+    {
+      "name": "s3_phase2_ZG.json",
+      "bytes": 148897,
+      "md5": "8303d357e6fdc43e3277d1acea12df29",
+      "sha256": "235b7b453bc657b58c389e2f4340dced9eb1fd338de9b963d2831be18c5c7472"
+    },
+    {
+      "name": "s3_phase2_ZG.raw",
+      "bytes": 9427172,
+      "md5": "ddb4164b660f1705d9e0ddee4c57e44e",
+      "sha256": "bb6ad7049dc75fa16af2e500f1a9c7115d5e1b7455f429774b3bd87c9574fec7"
+    },
+    {
+      "name": "s3_phase3_ZG.json",
+      "bytes": 148927,
+      "md5": "e0e7b9b94112917042c1caf85e438b1a",
+      "sha256": "ef423db1716f91f54d5e0c10d9db67b5cd9a652eeb22779e6766b0b6af33dbce"
+    },
+    {
+      "name": "s3_phase3_ZG.raw",
+      "bytes": 9427172,
+      "md5": "a5a515f0a5733a4cc688f54b98ea9e87",
+      "sha256": "b42658748a4ab12f5b582e356845d3cd7a28bf74e18007cdd413f2934778058d"
+    }
+  ],
+  "inventory": [
+    {
+      "name": "s085_reencoded.glc",
+      "bytes": 316,
+      "md5": "21654a58efefcecbfdf33a0ad926d53c",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s167_rx1.glc",
+      "bytes": 332,
+      "md5": "56ccb1d722da95d26d09e59df755003c",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s168_rx1.glc",
+      "bytes": 324,
+      "md5": "10f6094ca87cedfbc7058aca47f6be58",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s169_big.glc512",
+      "bytes": 2136,
+      "md5": "195a52dd79a56b4da17886266a1d67a2",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s170_rx1.glc",
+      "bytes": 320,
+      "md5": "6d2f0a909c9fbc992aac1792f0fea0c6",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s171_rx1.glc",
+      "bytes": 328,
+      "md5": "c963bebf706c034bdbbc5cc4328dd7f9",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s172_rx1.glc",
+      "bytes": 332,
+      "md5": "6a8781ab4b78a7bc95b3e613bc603794",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s173_big.glc512",
+      "bytes": 2260,
+      "md5": "30a4c08e3453323269c3e93a7443ae25",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s174_big.glc512",
+      "bytes": 2132,
+      "md5": "f12ca5b2073f85810fd89d92e59a807d",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s175_rx1.glc",
+      "bytes": 292,
+      "md5": "e9b07f13c65186fb461b377b5f024d28",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    },
+    {
+      "name": "s176_rx1.glc",
+      "bytes": 15,
+      "md5": "1030e2339d0767dbea919f27e6367abc",
+      "container_valid": false,
+      "png_valid": false,
+      "ledger_matches": false
+    },
+    {
+      "name": "s177_rx1.glc",
+      "bytes": 316,
+      "md5": "21654a58efefcecbfdf33a0ad926d53c",
+      "container_valid": true,
+      "png_valid": true,
+      "ledger_matches": true
+    }
+  ],
+  "ordinary_and_fallback_ready": true,
+  "pending": 0
+}
