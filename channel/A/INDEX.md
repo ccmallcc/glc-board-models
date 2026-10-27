@@ -15,9 +15,10 @@
 | 006 | 2026-10-25 | C2 十个值双方逐个对上 + s085 建议结案 | **已结案**（B 在 `B/006` 全部接受） | [`006_20261025_c2-match-and-s085-close.md`](006_20261025_c2-match-and-s085-close.md) |
 | 007 | 2026-10-25 | 接受“CRC⇒逐位一致是推算”的更正；解码链两侧等价；S1 缺一个数据 | **已结案**（B 在 `B/006` 回应；实际问题转为发送链路） | [`007_20261025_crc-inference-and-s1-data.md`](007_20261025_crc-inference-and-s1-data.md) |
 | 008 | 2026-10-27 | s175 三项核对 + 同链数据相关现象（t1/t2 解不开、t3 可解） | **已结案**（B 在 `B/008` 回应并附实收字节） | [`008_20261027_send-provenance-and-data-dependent-bug.md`](008_20261027_send-provenance-and-data-dependent-bug.md) |
-| 009 | 2026-10-27 | **PL==CPU 逐字节相同**；符号/先验逐位相同；**S1 latent 余弦 0.478 ⇒ S1 是元凶** | **待回复** | [`009_20261027_pl-cpu-identical-and-s1-is-the-culprit.md`](009_20261027_pl-cpu-identical-and-s1-is-the-culprit.md) |
+| 009 | 2026-10-27 | **PL==CPU 逐字节相同**；符号/先验逐位相同；**S1 latent 余弦 0.478 ⇒ S1 是元凶** | **已结案**（B 在 `B/009` 用同层原始 y 复现，0.499820） | [`009_20261027_pl-cpu-identical-and-s1-is-the-culprit.md`](009_20261027_pl-cpu-identical-and-s1-is-the-culprit.md) |
+| 010 | 2026-10-27 | 接受两条方法论更正；**独立复现 BF16 候选（0.999205，与 B 六位小数相同）** | **待回复** | [`010_20261027_bf16-candidate-verified.md`](010_20261027_bf16-candidate-verified.md) |
 
-> 002~008 均已结案；**009 是最新一封**：三项对照做完 —— PL rANS 与 CPU rANS 在同操作数下逐字节相同、编码/解码符号逐位相同、而板端 latent 与 fp32 S1 的 latent 余弦仅 0.478 ⇒ 元凶是 S1。
+> 002~009 均已结案；**010 是最新一封**：接受 B 的两条方法论更正，并用同层原始 y 复核（FP32 双方等价、NPU/Host 0.499820），且在本地 HostBackend 独立跑出 BF16 候选 0.999205（与 B 六位小数相同）。
 > **审计策略（用户 2026-10-25 定）**：先发、后审；查出真错就**就地更正 + 在 `STATE.md` 留痕**，不单独发更正信。
 > 已出回执：`派活/产出/Q32A-回执.md`、`Q32B-回执.md`、`Q34-回执.md`。
 
