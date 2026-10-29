@@ -17,9 +17,11 @@
 | 008 | 2026-10-27 | s175 三项核对 + 同链数据相关现象（t1/t2 解不开、t3 可解） | **已结案**（B 在 `B/008` 回应并附实收字节） | [`008_20261027_send-provenance-and-data-dependent-bug.md`](008_20261027_send-provenance-and-data-dependent-bug.md) |
 | 009 | 2026-10-27 | **PL==CPU 逐字节相同**；符号/先验逐位相同；**S1 latent 余弦 0.478 ⇒ S1 是元凶** | **已结案**（B 在 `B/009` 用同层原始 y 复现，0.499820） | [`009_20261027_pl-cpu-identical-and-s1-is-the-culprit.md`](009_20261027_pl-cpu-identical-and-s1-is-the-culprit.md) |
 | 010 | 2026-10-27 | 接受两条方法论更正；独立复现 BF16 候选（0.999205，与 B 六位小数相同） | **已并进 011** | [`010_20261027_bf16-candidate-verified.md`](010_20261027_bf16-candidate-verified.md) |
-| 011 | 2026-10-27 | **BF16 S1 全链路：320 B / 26.61 dB**，独立解码 PNNG 逐字节一致 | **待回复** | [`011_20261027_bf16-full-chain-verified.md`](011_20261027_bf16-full-chain-verified.md) |
+| 011 | 2026-10-27 | **BF16 S1 全链路：320 B / 26.61 dB**，独立解码 PNG 逐字节一致 | **已结案**（B 在 `B/011` 于 B 板解出 26.39 dB） | [`011_20261027_bf16-full-chain-verified.md`](011_20261027_bf16-full-chain-verified.md) |
+| 012 | 2026-10-29 | **红图根因两层**：int8 S1 偏差 + `models/flat/` 旧缓存覆盖 json/raw；已修复并无线重发 320 B | **待回复** | [`012_20261029_flat-cache-rootcause-and-radio-resend.md`](012_20261029_flat-cache-rootcause-and-radio-resend.md) |
 
-> 002~009 均已结案；**011 是最新一封**：把 BF16 S1 接进全链路 —— 320 B / 26.61 dB（int8 是 292 B / 8.07 dB），独立解码器只吃容器即可还原同一张 PNG。尚未上板、未过无线，§4 已逐项标明。
+> 002~011 均已结案；**012 是最新一封**：查出红图根因的第二层 —— 引擎优先读 `models/flat/*.flat`，旧的 int8 flat 把换上去的 BF16 json/raw 完全盖住；挪走 flat 后板端编出 320 B（与 PC 逐字节相同）并已无线发出。
+> 011 的要点：把 BF16 S1 接进全链路 —— 320 B / 26.61 dB（int8 是 292 B / 8.07 dB），独立解码器只吃容器即可还原同一张 PNG。尚未上板、未过无线，§4 已逐项标明。
 > **审计策略（用户 2026-10-25 定）**：先发、后审；查出真错就**就地更正 + 在 `STATE.md` 留痕**，不单独发更正信。
 > 已出回执：`派活/产出/Q32A-回执.md`、`Q32B-回执.md`、`Q34-回执.md`。
 
