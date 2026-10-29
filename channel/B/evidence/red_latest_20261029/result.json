@@ -1,0 +1,187 @@
+{
+  "files": [
+    {
+      "name": "s182_rx1.glc",
+      "bytes": 292,
+      "md5": "e9b07f13c65186fb461b377b5f024d28",
+      "sha256": "1b98d8ab14ee8cdb177f3963a3d328344d9cf7ca3f740947f08004586f716b9c"
+    },
+    {
+      "name": "s182_rx1.png",
+      "bytes": 145860,
+      "md5": "edbb04ea348c7beab18daa0ddc89ad36",
+      "sha256": "e4c9b7cc38494d978c478a399182b81bbabe84dc30f0588d829cd534af48d81f"
+    },
+    {
+      "name": "bf16_320B.glc",
+      "bytes": 320,
+      "md5": "edc042f33d90ea39e58e1fab6455a549",
+      "sha256": "bb355254ef326407805ddf3c5b4437e0c013c9f5eb6881ad144659a37be4354f"
+    },
+    {
+      "name": "bf16_A_reference.png",
+      "bytes": 120410,
+      "md5": "47817ce789fa4392995c83bac017b010",
+      "sha256": "bc272e2ae1fe1644983d526f8d323476a9b03e1ae875938f6fc5ae3580c26b85"
+    },
+    {
+      "name": "original.jpg",
+      "bytes": 21204,
+      "md5": "38fe5408d2576f2a45c99132c4cac980",
+      "sha256": "ba57ecbd51fc025ee8e2d9179187c7cf76c4284a366c35095b806149ad7abcd9"
+    },
+    {
+      "name": "bf16_B_PL_NPU.png",
+      "bytes": 121499,
+      "md5": "cd80e88e057aa53df8ed3cf16fa4b65b",
+      "sha256": "91faedbb26c0c77359b845a9798434f14c75633deded26ff5fef26a93880b285"
+    }
+  ],
+  "latest_retained_image": "s182_rx1",
+  "source_md5": "38fe5408d2576f2a45c99132c4cac980",
+  "A_source_commit": "e20d90fd967a8d1b378b1f2853818090f1bfbd18",
+  "A_PC_provenance": [
+    {
+      "path": "channel/A/evidence/bf16_IMG0036_320B.glc",
+      "commit": "e20d90fd967a8d1b378b1f2853818090f1bfbd18",
+      "name": "bf16.glc",
+      "bytes": 320,
+      "md5": "edc042f33d90ea39e58e1fab6455a549",
+      "sha256": "bb355254ef326407805ddf3c5b4437e0c013c9f5eb6881ad144659a37be4354f"
+    },
+    {
+      "path": "channel/A/evidence/bf16_IMG0036_320B_rec.png",
+      "commit": "e20d90fd967a8d1b378b1f2853818090f1bfbd18",
+      "name": "sender_reference.png",
+      "bytes": 120410,
+      "md5": "47817ce789fa4392995c83bac017b010",
+      "sha256": "bc272e2ae1fe1644983d526f8d323476a9b03e1ae875938f6fc5ae3580c26b85"
+    }
+  ],
+  "legacy_metrics": {
+    "mae": 78.23941548665364,
+    "max_difference": 242.0,
+    "psnr": 8.06325384296564,
+    "mean_rgb": [
+      237.07781982421875,
+      48.92253112792969,
+      56.11285400390625
+    ]
+  },
+  "bf16_metrics": {
+    "mae": 9.513804117838541,
+    "max_difference": 77.0,
+    "psnr": 26.392465122354164,
+    "mean_rgb": [
+      72.70588684082031,
+      73.28311157226562,
+      56.00352478027344
+    ]
+  },
+  "bf16_vs_A": {
+    "mae": 1.2012125651041667,
+    "max_difference": 22.0,
+    "psnr": 44.53553969439834,
+    "mean_rgb": [
+      72.70588684082031,
+      73.28311157226562,
+      56.00352478027344
+    ]
+  },
+  "decode_measurements": [
+    {
+      "tag": "normal_before",
+      "input_md5": "4bdfc307fc05fded8fd7761475bd5f12",
+      "png_md5": "7458825d32598348d326cb86c3b34eb4",
+      "seconds": 3.165175839999847,
+      "pl_calls": 4,
+      "symbols": 65536
+    },
+    {
+      "tag": "legacy",
+      "input_md5": "e9b07f13c65186fb461b377b5f024d28",
+      "png_md5": "edbb04ea348c7beab18daa0ddc89ad36",
+      "seconds": 2.568798890000153,
+      "pl_calls": 4,
+      "symbols": 65536,
+      "vs_original": {
+        "mae": 78.23941548665364,
+        "max_difference": 242.0,
+        "psnr": 8.06325384296564,
+        "mean_rgb": [
+          237.07781982421875,
+          48.92253112792969,
+          56.11285400390625
+        ]
+      },
+      "vs_sender_reference": {
+        "mae": 79.08071390787761,
+        "max_difference": 241.0,
+        "psnr": 7.945290974435851,
+        "mean_rgb": [
+          237.07781982421875,
+          48.92253112792969,
+          56.11285400390625
+        ]
+      }
+    },
+    {
+      "tag": "bf16",
+      "input_md5": "edc042f33d90ea39e58e1fab6455a549",
+      "png_md5": "cd80e88e057aa53df8ed3cf16fa4b65b",
+      "seconds": 2.7173528799999076,
+      "pl_calls": 4,
+      "symbols": 65536,
+      "vs_original": {
+        "mae": 9.513804117838541,
+        "max_difference": 77.0,
+        "psnr": 26.392465122354164,
+        "mean_rgb": [
+          72.70588684082031,
+          73.28311157226562,
+          56.00352478027344
+        ]
+      },
+      "vs_sender_reference": {
+        "mae": 1.2012125651041667,
+        "max_difference": 22.0,
+        "psnr": 44.53553969439834,
+        "mean_rgb": [
+          72.70588684082031,
+          73.28311157226562,
+          56.00352478027344
+        ]
+      }
+    },
+    {
+      "tag": "large",
+      "input_md5": "8bf86aa84715d589e3db9cb2d43c6374",
+      "png_md5": "1334e4d521df3c6ebbe60b443271f374",
+      "seconds": 12.968170370000053,
+      "pl_calls": 16,
+      "symbols": 262144
+    },
+    {
+      "tag": "normal_after",
+      "input_md5": "4bdfc307fc05fded8fd7761475bd5f12",
+      "png_md5": "7458825d32598348d326cb86c3b34eb4",
+      "seconds": 2.6171220100000028,
+      "pl_calls": 4,
+      "symbols": 65536
+    }
+  ],
+  "timing_scope": "B hardware experiment, warm engine + all fallback sessions prepared; decode-to-PNG call interval, not cold start/receive/radio/full end-to-end",
+  "ordinary_256_exact": true,
+  "large_512_exact": true,
+  "wireless_bf16_verified": false,
+  "legacy_292B_repaired": false,
+  "production_hashes_unchanged": true,
+  "protected_files": 15,
+  "fpga_before": "operating",
+  "fpga_after": "operating",
+  "firmware": "codex_native600_rans_20261025.bin",
+  "firmware_md5": "f93b513d25308ee02b6c96e998064908",
+  "app_recovered": true,
+  "radio_process_unchanged_during_guard": true,
+  "evidence_boundary": "Current boot image reception not observed: latest image already existed at boot; current boot s183 is MODE2 text. Identical bytes do not distinguish fresh deterministic re-encoding from old-file reuse."
+}
