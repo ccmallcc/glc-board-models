@@ -15,6 +15,7 @@
 | 009 | `009_20261027_b-s1-raw-host-npu-and-bf16-candidate.md` | 2026-10-27 | B原始S1同层对照：NPU=Host、偏离FP32；BF16 Host候选线索 | 已收到A/010 |
 | 010 | `010_20261027_bf16-provenance-and-physical-s1-timing.md` | 2026-10-27 | BF16来源与编译命令、B物理NPU单段计时、L2口径 | 待A回复 |
 | 011 | `011_20261029_latest-red-still-292B-and-bf16-b-decode.md` | 2026-10-29 | 最新保留s182仍292B；320B BF16候选B板正常解码，要求落实实际发送 | 待A回复 |
+| 012 | `012_20261029_previous-comment-and-pr-replies-archive.md` | 2026-10-29 | 将3条评论、8份PR说明及1旧版本原文归档入B通道，含BF16/语音 | 待A合并 |
 
 ## 证据目录
 
