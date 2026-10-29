@@ -1,0 +1,25 @@
+{
+  "kind": "Historical commands with path placeholders; fill directories before running",
+  "commands": [
+    {
+      "stage": "parse",
+      "recorded_command": "<CLI>/icraft-parse.exe --net_name s1_encoder_ga_hyper --network <ONNX_DIR>\\s1_encoder_ga_hyper.onnx --jr_path <BUILD_DIR> --framework ONNX --target zhuge --inputs_dtype FP32 --inputs 1,256,256,3 --inputs_layout NHWC --pre_method nop --pre_scale 1.0,1.0,1.0 --pre_mean 0.0,0.0,0.0 --channel_swap 0,1,2"
+    },
+    {
+      "stage": "optimize",
+      "recorded_command": "<CLI>/icraft-optimize.exe --json <BUILD_DIR>\\s1_encoder_ga_hyper_parsed.json --raw <BUILD_DIR>\\s1_encoder_ga_hyper_parsed.raw --jr_path <BUILD_DIR> --target zhuge --log_path <BUILD_DIR>\\optlog"
+    },
+    {
+      "stage": "quantize",
+      "recorded_command": "<CLI>/icraft-quantize.exe --json <BUILD_DIR>\\s1_encoder_ga_hyper_optimized.json --raw <BUILD_DIR>\\s1_encoder_ga_hyper_optimized.raw --jr_path <BUILD_DIR> --qdtype bf16 --target zhuge --log_path <BUILD_DIR>\\qlog"
+    },
+    {
+      "stage": "adapt",
+      "recorded_command": "<CLI>/icraft-adapt.exe --json <BUILD_DIR>\\s1_encoder_ga_hyper_quantized.json --raw <BUILD_DIR>\\s1_encoder_ga_hyper_quantized.raw --jr_path <BUILD_DIR> --target zhuge --log_path <BUILD_DIR>\\adaptlog"
+    },
+    {
+      "stage": "generate",
+      "recorded_command": "<CLI>/icraft-generate.exe --json <BUILD_DIR>\\s1_encoder_ga_hyper_adapted.json --raw <BUILD_DIR>\\s1_encoder_ga_hyper_adapted.raw --jr_path <BUILD_DIR>\\gen --log_path <BUILD_DIR>\\gen\\log"
+    }
+  ]
+}

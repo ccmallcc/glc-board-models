@@ -1,0 +1,156 @@
+{
+  "model_json_md5": "e6d05babfe9e863f2415c2a846739492",
+  "model_raw_md5": "13811c2c4e01717b5d7894792fa0c81f",
+  "model_raw_bytes": 290299708,
+  "rows": [
+    {
+      "name": "original",
+      "input_md5": "034d53afa5daa02979bbb9d9fdfb4cb0",
+      "seconds": 0.7908207599994057,
+      "outputs": {
+        "y": {
+          "shape": [
+            1,
+            256,
+            16,
+            16
+          ],
+          "min": -1.9296875,
+          "max": 1.3984375,
+          "mean": -0.0035116944927722216,
+          "std": 0.08583781868219376,
+          "md5": "f24ba3ad384ee059d90d8c6fdcb6af35",
+          "vs_fp32": {
+            "cosine": 0.9992048683453013,
+            "relative_l2": 0.04170134889090285,
+            "max_abs": 0.22514429688453674
+          }
+        },
+        "z": {
+          "shape": [
+            1,
+            256,
+            4,
+            4
+          ],
+          "min": -3.921875,
+          "max": 4.4375,
+          "mean": -0.0029467325657606125,
+          "std": 1.268735408782959,
+          "md5": "93134937e4f7195b48f607b2352c55d6",
+          "vs_fp32": {
+            "cosine": 0.999180040842425,
+            "relative_l2": 0.042452275786761653,
+            "max_abs": 0.33640944957733154
+          }
+        }
+      }
+    },
+    {
+      "name": "bright16",
+      "input_md5": "1b9838a4fa97da9f3921eba4223435f1",
+      "seconds": 0.778509670000858,
+      "outputs": {
+        "y": {
+          "shape": [
+            1,
+            256,
+            16,
+            16
+          ],
+          "min": -1.8125,
+          "max": 1.3515625,
+          "mean": -0.0030779042281210423,
+          "std": 0.08215662837028503,
+          "md5": "8c407d00e279b4b042a9a9e6a8cc6c09",
+          "vs_fp32": {
+            "cosine": 0.9989715528431453,
+            "relative_l2": 0.046760719096303374,
+            "max_abs": 0.224404938519001
+          }
+        },
+        "z": {
+          "shape": [
+            1,
+            256,
+            4,
+            4
+          ],
+          "min": -3.90625,
+          "max": 4.40625,
+          "mean": -0.004173247143626213,
+          "std": 1.249114751815796,
+          "md5": "4185c0b8c2710967b06f29e34d5dfd21",
+          "vs_fp32": {
+            "cosine": 0.9987633499024554,
+            "relative_l2": 0.05033784416874035,
+            "max_abs": 0.545960545539856
+          }
+        }
+      }
+    },
+    {
+      "name": "original_repeat",
+      "input_md5": "034d53afa5daa02979bbb9d9fdfb4cb0",
+      "seconds": 0.7784513699989475,
+      "outputs": {
+        "y": {
+          "shape": [
+            1,
+            256,
+            16,
+            16
+          ],
+          "min": -1.9296875,
+          "max": 1.3984375,
+          "mean": -0.0035116944927722216,
+          "std": 0.08583781868219376,
+          "md5": "f24ba3ad384ee059d90d8c6fdcb6af35",
+          "vs_fp32": {
+            "cosine": 0.9992048683453013,
+            "relative_l2": 0.04170134889090285,
+            "max_abs": 0.22514429688453674
+          }
+        },
+        "z": {
+          "shape": [
+            1,
+            256,
+            4,
+            4
+          ],
+          "min": -3.921875,
+          "max": 4.4375,
+          "mean": -0.0029467325657606125,
+          "std": 1.268735408782959,
+          "md5": "93134937e4f7195b48f607b2352c55d6",
+          "vs_fp32": {
+            "cosine": 0.999180040842425,
+            "relative_l2": 0.042452275786761653,
+            "max_abs": 0.33640944957733154
+          }
+        }
+      }
+    }
+  ],
+  "repeat_exact": true,
+  "host_raw_exact": true,
+  "timing_scope": "B measurement segment includes ResidentEngine.npu forward/wait/reset/readback plus subsequent input-file MD5 verification; excludes model load, session preparation, full encode and radio",
+  "production_hashes_unchanged": 15,
+  "radio_same_during_guard": true,
+  "restored_normal_and_fallback_ready": true,
+  "cold_total_seconds": null,
+  "full_codec_acceptance": false,
+  "l2_denominators": [
+    {
+      "name": "current_npu",
+      "l2_over_ref": 1.0206754526589206,
+      "l2_over_tested": 0.9815893290433821
+    },
+    {
+      "name": "bf16_host",
+      "l2_over_ref": 0.04170134889090489,
+      "l2_over_tested": 0.04123022640571942
+    }
+  ]
+}
