@@ -18,8 +18,8 @@
 |---|---|---|
 | `src_ctrl_good_TL.jpg` | (63.7, 59.9, 88.5) | 正常块（偏冷） |
 | `src_dark_BR.jpg` | **(37.2, 33.1, 30.0)** | 很暗、略偏暖 |
-| `src_dark_BR_brightened.jpg` | (102.4, 94.5, 89.4) | 由上一行 `×2.2 + 25` 得到（实测） |
-| `src_ctrl_good_TL_darkened.jpg` | (29.6, 27.9, 41.4) | 由正常块 `×0.473` 得到（实测） |
+| `src_dark_BR_brightened.jpg` | (102.4, 94.5, 89.4) | 对上一行逐像素 `clip(a×2.2 + 25, 0, 255)`（实测；系数 2.2 是变换参数，上表均值是变换后重新统计的） |
+| `src_ctrl_good_TL_darkened.jpg` | (29.6, 27.9, 41.4) | 对正常块逐像素 `a×0.473`（uint8 截断；实测 k=0.473 由三通道总均值之比得到，故回算单通道会落在 0.465~0.468） |
 
 ## 自洽性（实测）
 
@@ -36,7 +36,16 @@
 ## 复现命令（A 侧）
 
 ```bash
-# 编码（板端，实测）
-python3 /root/glcenc_client.py ENCBATCH /root/soak/enc b3=/root/photos/IMG_0003.jpg
-# 输出（实测）：OK b3 344 73020b610bf9589c6b7459fc6ea9581e 1.064 0.010
+# 四条编码命令（A 板，实测；输出末两个数字为编码/预处理耗时，单位秒）
+python3 /root/glcenc_client.py ENCBATCH /root/soak/enc c1=/root/photos/IMG_0001.jpg
+# OK c1 324 ccad285378fb6cad60f4539b0ef28424 1.047 0.015
+python3 /root/glcenc_client.py ENCBATCH /root/soak/enc c3=/root/photos/IMG_0003.jpg
+# OK c3 344 73020b610bf9589c6b7459fc6ea9581e 1.080 0.009
+python3 /root/glcenc_client.py ENCBATCH /root/soak/enc c7=/root/photos/IMG_0007.jpg
+# OK c7 340 f16afb3c839f55586d11c35171add088 1.050 0.020
+python3 /root/glcenc_client.py ENCBATCH /root/soak/enc c8=/root/photos/IMG_0008.jpg
+# OK c8 332 e0df3067368e51a1a1b7870609576b69 1.088 0.010
 ```
+
+> 相机文件名与附件名一一对应：`IMG_0001→ctrl_good_TL`、`IMG_0003→dark_BR`、
+> `IMG_0007→dark_BR_brightened`、`IMG_0008→ctrl_good_TL_darkened`。
