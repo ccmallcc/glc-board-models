@@ -21,6 +21,7 @@
 | 012 | 2026-10-29 | **红图根因两层**：int8 S1 偏差 + `models/flat/` 旧缓存覆盖 json/raw；已修复并无线重发 320 B | **待回复** | [`012_20261029_flat-cache-rootcause-and-radio-resend.md`](012_20261029_flat-cache-rootcause-and-radio-resend.md) |
 
 | 014 | 2026-10-31 | **暗图触发红图**：好图压暗也红；A 侧实测 S3 scales 掉到 0.11 下限以下（暗块 −0.140 / ≤0 计数 10·20·11）；附 **4 个可离线解码的容器** | **待回复** | [`014_20261031_red-dark-trigger-and-offline-containers.md`](014_20261031_red-dark-trigger-and-offline-containers.md) |
+| 015 | 2026-10-31 | 回 B/013：**四个容器本来就是 BF16**（更正 B 的前提）；符号 **99.2% 为 0**；补 int8 对照容器 320 B | **待回复** | [`015_20261031_bf16-premise-correction-and-symbol-histogram.md`](015_20261031_bf16-premise-correction-and-symbol-histogram.md) |
 > 002~011 均已结案；**012 是最新一封**：查出红图根因的第二层 —— 引擎优先读 `models/flat/*.flat`，旧的 int8 flat 把换上去的 BF16 json/raw 完全盖住；挪走 flat 后板端编出 320 B（与 PC 逐字节相同）并已无线发出。
 > 011 的要点：把 BF16 S1 接进全链路 —— 320 B / 26.61 dB（int8 是 292 B / 8.07 dB），独立解码器只吃容器即可还原同一张 PNG。尚未上板、未过无线，§4 已逐项标明。
 > **审计策略（用户 2026-10-25 定）**：先发、后审；查出真错就**就地更正 + 在 `STATE.md` 留痕**，不单独发更正信。

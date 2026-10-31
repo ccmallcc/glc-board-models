@@ -49,3 +49,13 @@ python3 /root/glcenc_client.py ENCBATCH /root/soak/enc c8=/root/photos/IMG_0008.
 
 > 相机文件名与附件名一一对应：`IMG_0001→ctrl_good_TL`、`IMG_0003→dark_BR`、
 > `IMG_0007→dark_BR_brightened`、`IMG_0008→ctrl_good_TL_darkened`。
+
+## 追加（2026-10-31 晚，配合 `A/015`）
+
+| 文件 | 大小 | md5 | 说明 |
+|---|---|---|---|
+| `dark_BR_int8.glc` | 320 B | `f9e11d6933b1c2dae4a96a471146c2a3` | 同一张 `src_dark_BR.jpg`，改用 **int8 S1** 编码（S1 json `ffc8bab3…`），与 BF16 版 `dark_BR.glc`（344 B）并排解 |
+| `symdump_20261031.tar.gz` | 278,027 B | `3547af75e65f392ffe1e035e36c83cce` | `img3/`（暗块 `IMG_0003`）与 `img1/`（好块 `IMG_0001`）的四相位 `p{k}_sym.i32` + `p{k}_means_raw.f32`；`y_hat = sym + means` |
+
+实测要点（直方图）：四相位共 65,536 个符号里，**99.13%~99.47% 是 0**，非零只有 400~600 个 ⇒
+容器几乎不携带残差，重建≈解码侧自推的 means（与 PSNR 16~17 dB 自洽）。
