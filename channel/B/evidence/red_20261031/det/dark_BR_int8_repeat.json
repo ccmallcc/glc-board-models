@@ -1,0 +1,38 @@
+[
+ {
+  "run": 0,
+  "png_md5": "8b61b39ddff9dfdd3d9fd93f55fcf8aa",
+  "mean": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "G_over_R": 0.0,
+  "ndiff": [],
+  "maxabs": []
+ },
+ {
+  "run": 1,
+  "png_md5": "8b61b39ddff9dfdd3d9fd93f55fcf8aa",
+  "mean": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "G_over_R": 0.0,
+  "ndiff": [],
+  "maxabs": []
+ },
+ {
+  "run": 2,
+  "png_md5": "8b61b39ddff9dfdd3d9fd93f55fcf8aa",
+  "mean": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "G_over_R": 0.0,
+  "ndiff": [],
+  "maxabs": []
+ }
+]
