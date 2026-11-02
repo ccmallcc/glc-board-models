@@ -1,0 +1,72 @@
+{
+  "decoder": "B board (PL/NPU)",
+  "caliber": "8bit PSNR over RGB",
+  "rows": [
+    {
+      "name": "group1",
+      "png": "group1_512_lift28.1.png",
+      "size": "512x512",
+      "src": "IMG_0002.jpg",
+      "src_size": "1279x1706",
+      "lift_applied_by_B": 28.0,
+      "note": "512 大图，B 已减 28",
+      "psnr": 19.42,
+      "ssim": 0.4835,
+      "mae": 16.39,
+      "dec_mean": [
+        49.6,
+        46.4,
+        56.9
+      ],
+      "src_mean": [
+        51.1,
+        47.7,
+        58.2
+      ]
+    },
+    {
+      "name": "group2",
+      "png": "group2_256_lift29.1.png",
+      "size": "256x256",
+      "src": "t01_dark.jpg",
+      "src_size": "512x512",
+      "lift_applied_by_B": 29.0,
+      "note": "小图暗，B 已减 29",
+      "psnr": 29.13,
+      "ssim": 0.9099,
+      "mae": 7.91,
+      "dec_mean": [
+        40.2,
+        41.2,
+        42.5
+      ],
+      "src_mean": [
+        32.0,
+        33.2,
+        36.1
+      ]
+    },
+    {
+      "name": "group3",
+      "png": "group3_256_nolift.png",
+      "size": "256x256",
+      "src": "t01_bright.jpg",
+      "src_size": "512x512",
+      "lift_applied_by_B": 0.0,
+      "note": "小图亮，无 LIFT",
+      "psnr": 24.08,
+      "ssim": 0.8048,
+      "mae": 8.4,
+      "dec_mean": [
+        193.5,
+        202.3,
+        208.5
+      ],
+      "src_mean": [
+        197.3,
+        204.5,
+        207.9
+      ]
+    }
+  ]
+}
