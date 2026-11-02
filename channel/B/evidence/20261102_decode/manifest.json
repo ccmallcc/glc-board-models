@@ -1,0 +1,104 @@
+{
+  "source_repository": "ccmallcc/glc-board-models",
+  "source_commit": "a7d1535fcec1cde73f15d773b8d64dc67eaabd91",
+  "source_manifest": "channel/A/evidence/20261102_db/MANIFEST.md",
+  "inputs": {
+    "t000.glc": {
+      "bytes": 320,
+      "md5": "37f98c1eb8d0c29176ca5930ad359a7d"
+    },
+    "t001.glc": {
+      "bytes": 332,
+      "md5": "775ac872edf7c649ebb4e42e746a8734"
+    },
+    "t002.glc": {
+      "bytes": 320,
+      "md5": "369355e46250d6ddd98cbcf3ffd3b98d"
+    },
+    "t003.glc": {
+      "bytes": 312,
+      "md5": "f199758f4ad4a488b1674133677f161b"
+    },
+    "s_dark.glc": {
+      "bytes": 204,
+      "md5": "c6401b0ae85c3a1604c882e906fb126c"
+    },
+    "s3_t01_bright_2.glc": {
+      "bytes": 280,
+      "md5": "e9d6cd8988d3902069430d8ac4e489f0"
+    }
+  },
+  "outputs": [
+    {
+      "group": 1,
+      "repeat": 0,
+      "file": "group1_512_lift28.1.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "dtype": "uint8",
+      "bytes": 466563,
+      "md5": "a0fff5b22bd4e0bf288e73cf6a9c8c49",
+      "sha256": "5137df565edc86fd9884fc12f5cf2f1b4c2ea5232d3d14feba7e54cc0ee97dec",
+      "rgb_sha256": "017686578da7c34a3c454e791035e7cd46a39db61ea467729ffc548fb75d2d87",
+      "lift_declared": 28.1,
+      "lift_subtracted": true,
+      "integer_offset_applied": 28,
+      "clipped_0_255": true,
+      "seconds": 11.203297910000401,
+      "pl_calls": 16,
+      "repeat_pixels_exact": true
+    },
+    {
+      "group": 2,
+      "repeat": 0,
+      "file": "group2_256_lift29.1.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGB",
+      "dtype": "uint8",
+      "bytes": 51619,
+      "md5": "b6c42ab7ecd98c6cf33ae42700170da1",
+      "sha256": "bf6ca9622315acf5908aa507e1e50b6277b8e239562f43ca45cd3efaa5f7fc68",
+      "rgb_sha256": "f3a13a08b7d18f46177a51a42b108454df42cdc20426f1c1271e0384e0efcca9",
+      "lift_declared": 29.1,
+      "lift_subtracted": true,
+      "integer_offset_applied": 29,
+      "clipped_0_255": true,
+      "seconds": 3.8547837200003414,
+      "pl_calls": 4,
+      "repeat_pixels_exact": true
+    },
+    {
+      "group": 3,
+      "repeat": 0,
+      "file": "group3_256_nolift.png",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGB",
+      "dtype": "uint8",
+      "bytes": 87274,
+      "md5": "3b3607fccca1968f67eacf0dff060940",
+      "sha256": "cf9320fe4dd8f683d495e033217157ca9acb17cca30a70b67d488e17efc2eb25",
+      "rgb_sha256": "44e32ff37db9a71c139d82a22cba56fec5620f3ba8a3ab74b77289a42a282913",
+      "lift_declared": 0.0,
+      "lift_subtracted": false,
+      "integer_offset_applied": 0,
+      "clipped_0_255": true,
+      "seconds": 2.174692359999426,
+      "pl_calls": 4,
+      "repeat_pixels_exact": true
+    }
+  ],
+  "all_groups_repeated_pixel_and_PNG_identical": true,
+  "output_domain": "Native decoded RGB uint8, lossless PNG; no extra resampling/crop/sharpening/color correction",
+  "lift_policy": "Group1 subtracted round(28.1)=28; group2 subtracted round(29.1)=29; clip to [0,255]; group3 no LIFT",
+  "timing_boundary": "Prepared resident B PL/NPU pipeline through complete PNG; includes original precision fallback, excludes loading/radio/UI",
+  "decoder_module_sha256": "6a16087b1a81e17653671940e560731eeeeef6a01ee7543094b44c7dd9f16ecc"
+}

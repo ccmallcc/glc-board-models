@@ -1,0 +1,24 @@
+{
+  "source_file": "src_dark_BR.jpg",
+  "source_md5": "6ee68b916634d76d562edfc33b69de04",
+  "domain": "RGB uint8 PNG/JPEG values cast to float64 before subtraction; mean over all pixels AND channels",
+  "formula": "10*log10(255**2 / mean((reference_rgb-decoded_rgb)**2))",
+  "per_channel_dB_average": false,
+  "chain": "Historical B PC decode, not the current PL/NPU decode",
+  "rows": [
+    {
+      "file": "dark_BR_det.png",
+      "bytes": 100624,
+      "md5": "0cc530b27d6dbab5aac8d1f5704a83f5",
+      "MSE_RGB": 1421.6702626546223,
+      "PSNR_RGB_dB": 16.60281481573538
+    },
+    {
+      "file": "dark_BR_int8_det.png",
+      "bytes": 109042,
+      "md5": "49f94c146974dd263af2e77d2a6dc0b6",
+      "MSE_RGB": 423.41636657714844,
+      "PSNR_RGB_dB": 21.863127198043376
+    }
+  ]
+}
