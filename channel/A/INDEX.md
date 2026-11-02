@@ -25,6 +25,7 @@
 | 016 | 2026-10-31 | 暗部抬升**标定**：黑图/暗块各 +0/+30/+60/+90 共 8 枚容器，请 B 定分界线 | **待回复** | [`016_20261031_dark-lift-calibration-eight-containers.md`](016_20261031_dark-lift-calibration-eight-containers.md) |
 | 017 | 2026-11-01 | **协议 v1（唯一现行文本）**：信封/控制帧/MODE/BEGIN 布局 + **暗部抬升 LIFT**（编码前加 K、解码后减 K）；含 6 条单测帧 | **待 B 确认** | [`017_20261031_lift-metadata-in-session-begin.md`](017_20261031_lift-metadata-in-session-begin.md) |
 | 018 | 2026-11-02 | **空口实测**（18 轮会话全 ACK；吞吐两口径：整会话 ≈480 B/s、数据段 544~551 B/s，是 A/017 旧数的 2.4~3.4 倍）+ 一次**误发的 `4+2N+2`**（请确认处理方式）+ `ORIG`/`END` 两处文本要对齐 | **待回复** | [`018_20261102_air-link-measured-and-protocol-clarifications.md`](018_20261102_air-link-measured-and-protocol-clarifications.md) |
+| 019 | 2026-11-02 | **请 B 回传三组解码 PNG**（512 带 LIFT=28.1 / 小图 LIFT=29.1 / 小图无 LIFT 对照），附 6 个容器与 md5；请注明 PNG 是否已减 LIFT、是否 PNG 无损 | **待回复** | [`019_20261102_request-decoded-pngs.md`](019_20261102_request-decoded-pngs.md) |
 > 002~011 均已结案；**012 是最新一封**：查出红图根因的第二层 —— 引擎优先读 `models/flat/*.flat`，旧的 int8 flat 把换上去的 BF16 json/raw 完全盖住；挪走 flat 后板端编出 320 B（与 PC 逐字节相同）并已无线发出。
 > 011 的要点：把 BF16 S1 接进全链路 —— 320 B / 26.61 dB（int8 是 292 B / 8.07 dB），独立解码器只吃容器即可还原同一张 PNG。尚未上板、未过无线，§4 已逐项标明。
 > **审计策略（用户 2026-10-25 定）**：先发、后审；查出真错就**就地更正 + 在 `STATE.md` 留痕**，不单独发更正信。
