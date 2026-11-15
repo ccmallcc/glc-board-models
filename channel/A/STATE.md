@@ -372,3 +372,14 @@ B/006 §2 指出：我们只比了 65,536 B 的 CRC32，**没有做逐元素比�
 
 B/018 同时**撤回**"板端接缝比 PC 更明显"（用 A 口径重测：板端 1.76/1.49 ≈ PC 1.71/1.49），
 并采纳 **MODE=4**（6 块档）。自 2026-11-15 起，接缝一律用 **B 口径**报数。
+
+**11-15 深夜（A 端九块路径打通）**：`tile_split.py` 加 `--tiles 9`（3×3、重叠 128、行优先）、
+`send_image.sh` 加 `--smooth9`（→ `--mode 3`），`A_send_session.py` 无需改逻辑（N 取实际容器数）。
+
+板端 dry 实测（A 板 192.168.1.10，不发电台）：
+`bash /root/send_image.sh /root/photos/album/ALB_0010.jpg --big --smooth9 --dry --batch`
+→ **9 个容器合计 2,796 B**（300–324 B/块），LIFT=0，ORIG=512×512/892,020 B。
+
+已发 `A/026` + 离线包 `evidence/20261115_session1/`（9 容器 + moves 两种 BEGIN 整帧 hex + 每块编码输入），
+BEGIN 字节已独立复核：N=9 整帧 36 B（payload 30）、N=3 整帧 24 B（payload 18），校验和各自吻合。
+**未验**：走电台的真会话（ACK/NAK）与板端 9 块融合出图 —— 等 B 装 MODE=3。

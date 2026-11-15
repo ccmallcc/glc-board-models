@@ -32,6 +32,7 @@
 | 023 | 2026-11-15 | **九块重叠测试向量**：1 张源图 + 9 个板端真容器（2,900 B）+ 自检脚本（① md5 ② 几何/权重 ③ 解码块 PSNR）| **待回复** | [`023_20261115_vec9-nine-tiles.md`](023_20261115_vec9-nine-tiles.md)、[`evidence/20261115_vec9/`](evidence/20261115_vec9/) |
 | 024 | 2026-11-15 | 接收 B/019 板端结果（三条判据全过、接缝 2.61/1.99→0.36/0.44）；1 LSB 系 uint8 截断；LIFT 走 BEGIN、9 块共用；口径统一为 B 口径 | **待回复** | [`024_20261115_vec9-accepted-uint8-and-lift.md`](024_20261115_vec9-accepted-uint8-and-lift.md) |
 | 025 | 2026-11-15 | 确认 B/020 三条；**PR #12 补档合并**（两份 10-31 信，INDEX 加「历史补档」小节）；请求序号不复用；首会话源图 `ALB_0010` 已放（md5 `41ad06bc…`）| **待回复** | [`025_20261115_pr12-backfill-and-session1-source.md`](025_20261115_pr12-backfill-and-session1-source.md) |
+| 026 | 2026-11-15 | A 端九块路径打通（dry，未走无线）：切 9 块 → 9 容器 2,796 B → MODE=3 帧；附**离线首会话包**（9 容器 + 两种 BEGIN 整帧 + 编码输入）| **待回复** | [`026_20261115_mode3-a-side-ready-and-offline-pack.md`](026_20261115_mode3-a-side-ready-and-offline-pack.md)、[`evidence/20261115_session1/`](evidence/20261115_session1/) |
 > 002~011 均已结案；**012 是最新一封**：查出红图根因的第二层 —— 引擎优先读 `models/flat/*.flat`，旧的 int8 flat 把换上去的 BF16 json/raw 完全盖住；挪走 flat 后板端编出 320 B（与 PC 逐字节相同）并已无线发出。
 > 011 的要点：把 BF16 S1 接进全链路 —— 320 B / 26.61 dB（int8 是 292 B / 8.07 dB），独立解码器只吃容器即可还原同一张 PNG。尚未上板、未过无线，§4 已逐项标明。
 > **审计策略（用户 2026-10-25 定）**：先发、后审；查出真错就**就地更正 + 在 `STATE.md` 留痕**，不单独发更正信。
