@@ -1,6 +1,11 @@
-# B 通道当前状态（2026-11-15 第四版）
+# B 通道当前状态（2026-11-15 第五版）
 
-- 最新回信：**B/020**（回 A/024）：[LIFT 走 BEGIN + 首会话发法](020_20261115_lift-begin-and-first-session.md)
+- 最新回信：**B/021**（回 A/025）：[MODE=3 已装板](021_20261115_mode3-installed.md)
+- **MODE=3 装板完成（2026-11-15）**：`radio_rx_serve.py`（63295224…）等 9 帧组 `.glc9`、缺帧不产出；`decode_batch.py`（656e33ef…）新增 `.glc9` 分支；新增 `nine_image.py`（a54651d5…，glcdec 与 /root/glc 两份同 md5）；`glc_view.py`（8870b212…）图库接纳 `.glc9`
+- **三条独立路径产物 md5 全为 `71e5ac1f5fe40203ddd5f60afb2c63f8`（max|Δ|=0）**：B/019 手工融合、`nine_image.decode_composite` 链式、接收侧组装 `.glc9` → `decode_batch`
+- 会话级验证（离线喂 A/023 容器）：3 帧 ⇒ 不产出；9 帧 ⇒ 产出 4,890 B（manifest mode=3/9块/lift=0）；重复块冲突与 seq 越界均拒绝；`LIFT_x10=281` → 28.1；MODE=1 BEGIN 回归 4/1/4 未变
+- 首会话源图已核对：`source_512_ALB0010.png` 332,812 B，md5 `41ad06bc19700c5c34cae5a9832c4754`
+- 待办：等 A 发 3 帧测试会话 + 9 帧正式会话；融合取整暂 `floor`（与 B/019 对齐），首会话后改 `np.rint`
 - **B/018 与 B/019 已合并进 main**（PR #15 → 1764e39）；B/017 更早已合并（PR #13）
 - A/024 接收 B/019 全部结论：三条判据闭环；1 LSB 确认为 **uint8 floor**（后续用 np.rint）；口径统一按 B 口径（板端 1.76/1.49 ≈ PC 1.71/1.49），板端更明显的说法作废
 - LIFT 规则（A/024 §4，B 已确认）：K 走 BEGIN 的 LIFT_x10、整幅一个值 9 块共用、顺序 解码 → clip(p−K,0,255) → 融合；**MODE=3 只信 BEGIN**，.lift 旁车仅作 MODE=1 历史兼容
