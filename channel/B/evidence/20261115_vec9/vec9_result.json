@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-15",
+  "side": "B",
+  "vector": "channel/A/evidence/20261115_vec9 (A/023)",
+  "board": "FMQL30TAI, NPU int8/BF16 + PL rANS, 993 MB, 4 core",
+  "checks": {
+    "① md5 (21 files)": "21 pass / 0 fail (local + board 双侧)",
+    "② source tiles fused by our impl": {
+      "max_abs_err_LSB": 0,
+      "psnr_vs_source_dB": 151.14,
+      "vs_A_reference_blend_max_LSB": 1,
+      "note": "与 A 的 reference_blend 差 1 LSB，疑为对 A 脚本在 uint8 落盘后才比对（我方在 float 域比对）"
+    },
+    "③ decoded tiles fused": {
+      "psnr_vs_source_dB": 19.83,
+      "bound_dB": 18,
+      "passed": true
+    }
+  },
+  "seams_B_metric": {
+    "definition": "mean(|dx| at seam col 255) / mean(|dx| over other cols)",
+    "source_512": [
+      0.42,
+      0.46
+    ],
+    "four_block_stitch_same_decodes": [
+      2.61,
+      1.99
+    ],
+    "nine_block_fused": [
+      0.36,
+      0.44
+    ]
+  },
+  "psnr": {
+    "four_block_same_decodes_dB": 19.16,
+    "nine_block_fused_dB": 19.83,
+    "delta_dB": 0.67
+  },
+  "per_tile_decode_psnr_dB": {
+    "tile01": 33.84,
+    "tile02": 21.89,
+    "tile03": 20.29,
+    "tile04": 20.12,
+    "tile05": 19.35,
+    "tile06": 19.72,
+    "tile07": 15.4,
+    "tile08": 17.41,
+    "tile09": 20.03
+  },
+  "timing": {
+    "decode_sum_s": 24.06,
+    "decode_first_tile_s": 4.89,
+    "decode_steady_s": [
+      2.165,
+      2.292,
+      2.195,
+      2.171,
+      2.173,
+      3.9,
+      2.165,
+      2.113,
+      2.161
+    ],
+    "decode_wall_incl_preload_s": 86,
+    "fusion_s": 0.083
+  },
+  "artifacts": {
+    "fused_board.png": "board NPU decode of the 9 containers, fused by flat-top (1e-12) - 71e5ac1f5fe40203ddd5f60afb2c63f8",
+    "quad_board.png": "4-block stitch of the same decodes (for seam comparison) - 8f1b6f9b4502c6b16f198ebd318ea79c"
+  },
+  "note": "LIFT: 本向量无 .lift 旁车、源图无抬升需求，故未减 K；A/023 未给 K 约定"
+}
