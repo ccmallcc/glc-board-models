@@ -1,0 +1,145 @@
+/root/tile_split.py:67: DeprecationWarning: LANCZOS is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.LANCZOS instead.
+  out = im.resize((BIG, BIG), Image.LANCZOS)
+DARK_LIFT 21.3
+TILE /root/send_work/tiles_9482/000.jpg 10576 B
+TILE /root/send_work/tiles_9482/001.jpg 8616 B
+TILE /root/send_work/tiles_9482/002.jpg 6526 B
+TILE /root/send_work/tiles_9482/003.jpg 17127 B
+TILE /root/send_work/tiles_9482/004.jpg 15719 B
+TILE /root/send_work/tiles_9482/005.jpg 14339 B
+TILE /root/send_work/tiles_9482/006.jpg 14799 B
+TILE /root/send_work/tiles_9482/007.jpg 14577 B
+TILE /root/send_work/tiles_9482/008.jpg 16555 B
+TILE_DONE n=9 mode=big tiles=9
+  大图模式：已切成 9 块（重叠 128，MODE=3）-> /root/send_work/tiles_9482/000.jpg /root/send_work/tiles_9482/001.jpg /root/send_work/tiles_9482/002.jpg /root/send_work/tiles_9482/003.jpg /root/send_work/tiles_9482/004.jpg /root/send_work/tiles_9482/005.jpg /root/send_work/tiles_9482/006.jpg /root/send_work/tiles_9482/007.jpg /root/send_work/tiles_9482/008.jpg 
+############################################################################
+# GLC 电台发图   2026-09-22 14:30:17
+# 工作目录: /root/send_work/20260922_143017
+############################################################################
+        [TIME] 启动(含 bash/日志 tee)      1 ms
+
+=== [0/3] 环境自检 ===
+  电台设备  : /dev/ttyUSB0 OK
+  位流指纹  : 0x20260922
+  内存      : 总 993 MB / 可用 265 MB
+  空闲磁盘  : 8.7G
+  编码方式  : 常驻守护进程（单张 ~1.4 s）
+        [TIME] 环境自检         14 ms
+
+=== [1/3] 收集输入 ===
+  [1] 000.jpg  ->  待编码
+  [2] 001.jpg  ->  待编码
+  [3] 002.jpg  ->  待编码
+  [4] 003.jpg  ->  待编码
+  [5] 004.jpg  ->  待编码
+  [6] 005.jpg  ->  待编码
+  [7] 006.jpg  ->  待编码
+  [8] 007.jpg  ->  待编码
+  [9] 008.jpg  ->  待编码
+        [TIME] 收集输入         84 ms
+
+=== [2/3] 编码 ===
+  --- 常驻守护进程（预处理 + NPU 都在进程内）---
+        OK 000 320 69520bdb9692288f6e81d90138f411e3 0.997 0.009
+        OK 001 292 bb79212f86b91f7041f385e800944643 0.983 0.010
+        OK 002 300 2617b718203713f9e598951cf4ca8384 0.975 0.009
+        OK 003 304 86ef67f8dcbe42338fc957698dd70766 0.974 0.009
+        OK 004 288 0e460d704249ee27b6407595d0c53033 0.976 0.009
+        OK 005 292 2495f0c3d67f552c5552086e933d383d 0.969 0.009
+        OK 006 276 868367eaf3ae893a4c91c046c51b2043 0.964 0.009
+        OK 007 280 b35ad36632031d73848cb0d21d4804e1 0.966 0.009
+        OK 008 284 fb21dfa0b14b624dfbc22277be8736b6 0.971 0.009
+        DONE 9/9
+        [TIME] 编码(含 daemon 往返)   9183 ms
+
+  => 000.glc  320 B  md5=69520bdb9692288f6e81d90138f411e3
+     空口净时间 ≈ 0.13 s @19.2 kbps
+  => 001.glc  292 B  md5=bb79212f86b91f7041f385e800944643
+     空口净时间 ≈ 0.12 s @19.2 kbps
+  => 002.glc  300 B  md5=2617b718203713f9e598951cf4ca8384
+     空口净时间 ≈ 0.12 s @19.2 kbps
+  => 003.glc  304 B  md5=86ef67f8dcbe42338fc957698dd70766
+     空口净时间 ≈ 0.13 s @19.2 kbps
+  => 004.glc  288 B  md5=0e460d704249ee27b6407595d0c53033
+     空口净时间 ≈ 0.12 s @19.2 kbps
+  => 005.glc  292 B  md5=2495f0c3d67f552c5552086e933d383d
+     空口净时间 ≈ 0.12 s @19.2 kbps
+  => 006.glc  276 B  md5=868367eaf3ae893a4c91c046c51b2043
+     空口净时间 ≈ 0.12 s @19.2 kbps
+  => 007.glc  280 B  md5=b35ad36632031d73848cb0d21d4804e1
+     空口净时间 ≈ 0.12 s @19.2 kbps
+  => 008.glc  284 B  md5=fb21dfa0b14b624dfbc22277be8736b6
+     空口净时间 ≈ 0.12 s @19.2 kbps
+
+  编码完成：9 张图 -> 9 个容器，合计 2636 B
+  纯空口时间 ≈ 1.1 s（协议开销另计）
+
+=== [3/3] 电台发送（会话模式，一次发完 9 张）===
+  ⚠️ 请先确认 B 端已经在监听。等不到会在约 30 s 后放弃。
+
+  ⚠️ 没有 ORIG，放弃 LIFT（否则会发出 B 端解析不了的 4+2N+2 长度）
+========================================================================
+[SS] 会话模式发送：9 张
+[SS]     1  000.glc           320 B  69520bdb9692288f6e81d90138f411e3
+[SS]     2  001.glc           292 B  bb79212f86b91f7041f385e800944643
+[SS]     3  002.glc           300 B  2617b718203713f9e598951cf4ca8384
+[SS]     4  003.glc           304 B  86ef67f8dcbe42338fc957698dd70766
+[SS]     5  004.glc           288 B  0e460d704249ee27b6407595d0c53033
+[SS]     6  005.glc           292 B  2495f0c3d67f552c5552086e933d383d
+[SS]     7  006.glc           276 B  868367eaf3ae893a4c91c046c51b2043
+[SS]     8  007.glc           280 B  b35ad36632031d73848cb0d21d4804e1
+[SS]     9  008.glc           284 B  fb21dfa0b14b624dfbc22277be8736b6
+[SS]   BEGIN 里会列长度 ｜ 每张最多试 8 次 ｜ 连续失败 5 张即中止 ｜ 补发 2 轮
+========================================================================
+[SS] 清缓冲 2.0 s …
+[SS]   AT+FREQ?    -> FREQ:470.110MHz OK                            [OK]
+[SS]   AT+SYMBOL?  -> 19.2 kbps@9.6 khz OK                          [OK]
+[SS]   AT+UART?    -> UART: banud:115200, dataBit:8, stop:1, check:N [OK]
+[SS] AT+EXIT=1 -> 'OK'
+[SS] AT 自检一次性耗时 0.88 s
+[SS] ① SESSION_BEGIN  N=9  逐张长度=[320, 292, 300, 304, 288, 292, 276, 280, 284]  （28 B 帧）
+[SS]   ✅ SESSION_BEGIN 已确认（第 1 次，0.24 s）—— 对方现在应该开始连收 9 帧
+[SS] ② 逐张发送（seq=1..9）
+[SS]     [  1/9] 000.glc           320 B  OK  0.58 s（第 1 次）
+[SS]     [  2/9] 001.glc           292 B  OK  0.54 s（第 1 次）
+[SS]     [  3/9] 002.glc           300 B  OK  0.56 s（第 1 次）
+[SS]     [  4/9] 003.glc           304 B  OK  0.56 s（第 1 次）
+[SS]     [  5/9] 004.glc           288 B  OK  0.54 s（第 1 次）
+[SS]     —— 进度：已发 5/9 ｜ 已确认 5/9 ——
+[SS]     [  6/9] 005.glc           292 B  OK  0.56 s（第 1 次）
+[SS]     [  7/9] 006.glc           276 B  OK  0.54 s（第 1 次）
+[SS]     [  8/9] 007.glc           280 B  OK  0.54 s（第 1 次）
+[SS]     [  9/9] 008.glc           284 B  OK  0.56 s（第 1 次）
+[SS]     —— 进度：已发 9/9 ｜ 已确认 9/9 ——
+[SS] ④ SESSION_END  sent=9 ok=9
+[SS]   ✅ SESSION_END 已确认（第 1 次，0.22 s）
+========================================================================
+[SS] 数据段耗时 5.01 s   共 9 张   成功 9   缺 0 
+[SS] 请把下面几行发给对方核对：
+[SS]   rx1    000.glc           320 B  md5=69520bdb9692288f6e81d90138f411e3  OK
+[SS]   rx2    001.glc           292 B  md5=bb79212f86b91f7041f385e800944643  OK
+[SS]   rx3    002.glc           300 B  md5=2617b718203713f9e598951cf4ca8384  OK
+[SS]   rx4    003.glc           304 B  md5=86ef67f8dcbe42338fc957698dd70766  OK
+[SS]   rx5    004.glc           288 B  md5=0e460d704249ee27b6407595d0c53033  OK
+[SS]   rx6    005.glc           292 B  md5=2495f0c3d67f552c5552086e933d383d  OK
+[SS]   rx7    006.glc           276 B  md5=868367eaf3ae893a4c91c046c51b2043  OK
+[SS]   rx8    007.glc           280 B  md5=b35ad36632031d73848cb0d21d4804e1  OK
+[SS]   rx9    008.glc           284 B  md5=fb21dfa0b14b624dfbc22277be8736b6  OK
+[SS] SESSION_DONE  ok=9/9
+
+=== 本次产物（把这 4 列发给 B 核对）===
+  序号  文件名                      字节  md5
+  1     000.glc                          320  69520bdb9692288f6e81d90138f411e3
+  2     001.glc                          292  bb79212f86b91f7041f385e800944643
+  3     002.glc                          300  2617b718203713f9e598951cf4ca8384
+  4     003.glc                          304  86ef67f8dcbe42338fc957698dd70766
+  5     004.glc                          288  0e460d704249ee27b6407595d0c53033
+  6     005.glc                          292  2495f0c3d67f552c5552086e933d383d
+  7     006.glc                          276  868367eaf3ae893a4c91c046c51b2043
+  8     007.glc                          280  b35ad36632031d73848cb0d21d4804e1
+  9     008.glc                          284  fb21dfa0b14b624dfbc22277be8736b6
+
+  目录: /root/send_work/20260922_143017
+  日志: /root/send_work/last.log
+        [TIME] 电台发送      16021 ms
+SEND_IMAGE_DONE rc=0 n=9

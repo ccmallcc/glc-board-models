@@ -1,0 +1,99 @@
+/root/tile_split.py:67: DeprecationWarning: LANCZOS is deprecated and will be removed in Pillow 10 (2023-07-01). Use Resampling.LANCZOS instead.
+  out = im.resize((BIG, BIG), Image.LANCZOS)
+TILE /root/send_work/tiles_11832/000.jpg 15797 B
+TILE /root/send_work/tiles_11832/001.jpg 9427 B
+TILE /root/send_work/tiles_11832/002.jpg 20229 B
+TILE /root/send_work/tiles_11832/003.jpg 21270 B
+TILE_DONE n=4 mode=big tiles=4
+  大图模式：已切成 4 块 -> /root/send_work/tiles_11832/000.jpg /root/send_work/tiles_11832/001.jpg /root/send_work/tiles_11832/002.jpg /root/send_work/tiles_11832/003.jpg 
+############################################################################
+# GLC 电台发图   2026-09-22 14:32:41
+# 工作目录: /root/send_work/20260922_143241
+############################################################################
+        [TIME] 启动(含 bash/日志 tee)      0 ms
+
+=== [0/3] 环境自检 ===
+  电台设备  : /dev/ttyUSB0 OK
+  位流指纹  : 0x20260922
+  内存      : 总 993 MB / 可用 265 MB
+  空闲磁盘  : 8.7G
+  编码方式  : 常驻守护进程（单张 ~1.4 s）
+        [TIME] 环境自检         15 ms
+
+=== [1/3] 收集输入 ===
+  [1] 000.jpg  ->  待编码
+  [2] 001.jpg  ->  待编码
+  [3] 002.jpg  ->  待编码
+  [4] 003.jpg  ->  待编码
+        [TIME] 收集输入         52 ms
+
+=== [2/3] 编码 ===
+  --- 常驻守护进程（预处理 + NPU 都在进程内）---
+        OK 000 304 38cab610c759c788a25de959fbfde3aa 1.042 0.010
+        OK 001 324 1e78cf6cfbbbfe34f2374550f5b39534 0.991 0.011
+        OK 002 344 42fb142bb56aad3971fa6a43ef5a3494 0.979 0.010
+        OK 003 320 e9b1b0c13d07bf8f5e958ac35b5c5542 0.986 0.011
+        DONE 4/4
+        [TIME] 编码(含 daemon 往返)   4281 ms
+
+  => 000.glc  304 B  md5=38cab610c759c788a25de959fbfde3aa
+     空口净时间 ≈ 0.13 s @19.2 kbps
+  => 001.glc  324 B  md5=1e78cf6cfbbbfe34f2374550f5b39534
+     空口净时间 ≈ 0.14 s @19.2 kbps
+  => 002.glc  344 B  md5=42fb142bb56aad3971fa6a43ef5a3494
+     空口净时间 ≈ 0.14 s @19.2 kbps
+  => 003.glc  320 B  md5=e9b1b0c13d07bf8f5e958ac35b5c5542
+     空口净时间 ≈ 0.13 s @19.2 kbps
+
+  编码完成：4 张图 -> 4 个容器，合计 1292 B
+  纯空口时间 ≈ 0.5 s（协议开销另计）
+
+=== [3/3] 电台发送（会话模式，一次发完 4 张）===
+  ⚠️ 请先确认 B 端已经在监听。等不到会在约 30 s 后放弃。
+
+  原图 /root/photos/IMG_0011.jpg -> ORIG 512x512:64972（写进 BEGIN）
+========================================================================
+[SS] 会话模式发送：4 张
+[SS]     1  000.glc           304 B  38cab610c759c788a25de959fbfde3aa
+[SS]     2  001.glc           324 B  1e78cf6cfbbbfe34f2374550f5b39534
+[SS]     3  002.glc           344 B  42fb142bb56aad3971fa6a43ef5a3494
+[SS]     4  003.glc           320 B  e9b1b0c13d07bf8f5e958ac35b5c5542
+[SS]   BEGIN 里会列长度 ｜ 每张最多试 8 次 ｜ 连续失败 5 张即中止 ｜ 补发 2 轮
+========================================================================
+[SS] 清缓冲 2.0 s …
+[SS]   AT+FREQ?    -> FREQ:470.110MHz OK                            [OK]
+[SS]   AT+SYMBOL?  -> 19.2 kbps@9.6 khz OK                          [OK]
+[SS]   AT+UART?    -> UART: banud:115200, dataBit:8, stop:1, check:N [OK]
+[SS] AT+EXIT=1 -> 'OK'
+[SS] AT 自检一次性耗时 0.90 s
+[SS] ① SESSION_BEGIN  N=4  逐张长度=[304, 324, 344, 320]  （26 B 帧）
+[SS]    原图 512x512  64972 B ⇒ 载荷 1292 B，压缩比 50.3 : 1
+[SS]   ✅ SESSION_BEGIN 已确认（第 1 次，0.22 s）—— 对方现在应该开始连收 4 帧
+[SS] ② 逐张发送（seq=1..4）
+[SS]     [  1/4] 000.glc           304 B  OK  0.60 s（第 1 次）
+[SS]     [  2/4] 001.glc           324 B  OK  0.60 s（第 1 次）
+[SS]     [  3/4] 002.glc           344 B  OK  0.66 s（第 1 次）
+[SS]     [  4/4] 003.glc           320 B  OK  0.64 s（第 1 次）
+[SS]     —— 进度：已发 4/4 ｜ 已确认 4/4 ——
+[SS] ④ SESSION_END  sent=4 ok=4
+[SS]   ✅ SESSION_END 已确认（第 1 次，0.22 s）
+========================================================================
+[SS] 数据段耗时 2.51 s   共 4 张   成功 4   缺 0 
+[SS] 请把下面几行发给对方核对：
+[SS]   rx1    000.glc           304 B  md5=38cab610c759c788a25de959fbfde3aa  OK
+[SS]   rx2    001.glc           324 B  md5=1e78cf6cfbbbfe34f2374550f5b39534  OK
+[SS]   rx3    002.glc           344 B  md5=42fb142bb56aad3971fa6a43ef5a3494  OK
+[SS]   rx4    003.glc           320 B  md5=e9b1b0c13d07bf8f5e958ac35b5c5542  OK
+[SS] SESSION_DONE  ok=4/4
+
+=== 本次产物（把这 4 列发给 B 核对）===
+  序号  文件名                      字节  md5
+  1     000.glc                          304  38cab610c759c788a25de959fbfde3aa
+  2     001.glc                          324  1e78cf6cfbbbfe34f2374550f5b39534
+  3     002.glc                          344  42fb142bb56aad3971fa6a43ef5a3494
+  4     003.glc                          320  e9b1b0c13d07bf8f5e958ac35b5c5542
+
+  目录: /root/send_work/20260922_143241
+  日志: /root/send_work/last.log
+        [TIME] 电台发送       8841 ms
+SEND_IMAGE_DONE rc=0 n=4
